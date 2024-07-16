@@ -24,7 +24,7 @@ export default async function HomeLayout({
         <body>
           <Providers>
             <Header session={getUser()} />
-            <main className="bg-white w-full h-full flex flex-col">
+            <main className="bg-white flex flex-col">
               {children}
             </main>
             <Footer />
@@ -34,3 +34,4 @@ export default async function HomeLayout({
     </html>
   );
 }
+ 

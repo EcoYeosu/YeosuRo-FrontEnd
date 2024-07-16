@@ -5,7 +5,7 @@ import { siteConfig } from "@constant/config";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Script from "next/script";
+import ReactQueryProvider from "@/lib/ReactQueryProvider";
 
 // TODO: 운영 전 메타데이터 수정 필요
 export const metadata: Metadata = {
@@ -50,24 +50,26 @@ export default async function RootLayout({
   return (
     <html lang="ko" className="light">
       <body>
-      <Providers>
-        <Toaster
-          position={"top-center"}
-          toastOptions={{
-            className: "",
-            duration: 1500,
-            style: {
-              background: "#434656",
-              color: "#fff",
-              padding: "0.875rem 1.25rem",
-              borderRadius: "1rem",
-            },
-          }}
-        />
-        <main className="w-[100dVw] h-[100dVh] flex flex-col">
-          {children}
-        </main>
-      </Providers>
+        <ReactQueryProvider>
+          <Providers>
+            <Toaster
+              position={"top-center"}
+              toastOptions={{
+                className: "",
+                duration: 1500,
+                style: {
+                  background: "#434656",
+                  color: "#fff",
+                  padding: "0.875rem 1.25rem",
+                  borderRadius: "1rem",
+                },
+              }}
+            />
+            <main className="w-[100dVw] h-[100dVh] flex flex-col">
+              {children}
+            </main>
+          </Providers>
+        </ReactQueryProvider>
         <Analytics />
         <SpeedInsights />
       </body>
