@@ -1,7 +1,12 @@
+import Comunity from "@/features/comunity/components/Comunity";
 import React from "react";
 
 function page() {
-  return <div>page</div>;
+  return (
+    <div>
+      <Comunity/>
+    </div>
+  );
 }
 
 export default page;
