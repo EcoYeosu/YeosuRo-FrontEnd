@@ -6,11 +6,16 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 
-const getResult = (response: AxiosResponse) => response.data.body;
+const getResult = (response: AxiosResponse) => response.data;
 
 function HttpClient(config?: AxiosRequestConfig) {
   const client: AxiosInstance = axios.create(config);
+  const token = '';
+
   const onRequestFulfilled = (config: InternalAxiosRequestConfig) => {
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
     return config;
   };
 
