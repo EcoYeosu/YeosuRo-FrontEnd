@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ReactQueryProviders>
-          <div>{children}</div>
+          <div className="layout">{children}</div>
         </ReactQueryProviders>
       </body>
     </html>

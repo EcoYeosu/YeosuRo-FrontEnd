@@ -1,10 +1,10 @@
-import Comunity from "@/features/comunity/components/Comunity";
+import Community from "@/features/comunity/components/Community";
 import React from "react";
 
 function page() {
   return (
     <div>
-      <Comunity/>
+      <Community/>
     </div>
   );
 }
