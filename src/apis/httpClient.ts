@@ -11,6 +11,10 @@ const getResult = (response: AxiosResponse) => response.data.body;
 function HttpClient(config?: AxiosRequestConfig) {
   const client: AxiosInstance = axios.create(config);
   const onRequestFulfilled = (config: InternalAxiosRequestConfig) => {
+    const token = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyMzE4NzU5MCwiZW1haWwiOiJ0ZXN0QG5hdmVyLmNvbSJ9.xrIFBoWMWcGQzFqYZS_kE2qoX55ckfkgGznsWOCamOKmWq26wr4pySxQcCCTdqZ4OwgPywCyarH709ASPQCXJA';
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   };
 

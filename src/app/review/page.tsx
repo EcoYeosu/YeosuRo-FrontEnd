@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const ReviewPage = () => {
+const reviewPage = () => {
   return (
     <div className="w-360 mx-auto border border-1 border-black ">
       <div className="relative flex justify-start items-center h-11">
@@ -22,4 +22,4 @@ const ReviewPage = () => {
   );
 };
 
-export default ReviewPage;
+export default reviewPage;
