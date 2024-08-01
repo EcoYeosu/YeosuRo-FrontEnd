@@ -1,10 +1,16 @@
 import CommunityDetail from '@/features/comunity/components/CommunityDetail'
 import React from 'react'
 
-function page() {
+export interface CommunityDetailParams  {
+  params:{id:string}
+}
+
+function page({ params: { id } }: CommunityDetailParams) {
+  const numericId = Number(id);
+
   return (
     <div>
-      <CommunityDetail />
+      <CommunityDetail id={numericId} />
     </div>
   )
 }
