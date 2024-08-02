@@ -21,6 +21,12 @@ export const useFileUpload = (maxFiles:number) => {
 
   const onChangeFileHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = Array.from(e.target.files || []);
+
+    if (selectedFiles.length + newFiles.length > maxFiles) {
+      // TODO: 최대 5장 toast 추가
+      return;
+    }
+
     const validFilesPromises = newFiles.map(async file => {
       const previewUrl = URL.createObjectURL(file);
       const uploadedUrl = await uploadFile(file);
