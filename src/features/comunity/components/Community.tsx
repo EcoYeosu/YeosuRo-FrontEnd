@@ -4,12 +4,14 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import FeedCard from './atoms/FeedCard';
 import { useGetCommunityList } from '../hooks/useGetComunityList';
+import { BottomSheet } from '@/components/common/bottomSheet/Bottomsheet';
+import DetailBottomNavigation from '@/components/common/bottomNavigation/DetailBottomNavigation';
 
 // TODO: 인기글, 여수랑 추가 예정
 const CATEGORYLIST = [
   { id: 1, title: 'travel' },
   { id: 2, title: 'free_talk' }
-];
+] as const
 
 function Community() {
   const router = useRouter();
@@ -31,14 +33,12 @@ function Community() {
     router.push(newUrl.toString());
   };
 
-  if (isLoading) return <div>Loading...</div>;
-
-  if (error) return <div>Error </div>;
-
-  console.log(data);
-
   return (
-    <div>
+    <div className='min-h-screen'>
+      <div className='flex justify-between'>
+        <h1>커뮤니티</h1>
+        <button onClick={() => router.push('/comunity/post')}>글작성</button>
+      </div>
       <div>
         {CATEGORYLIST.map((item) =>
           <button
@@ -50,6 +50,7 @@ function Community() {
         )}
       </div>
       <FeedCard data={data} />
+      <DetailBottomNavigation />
     </div>
   );
 }

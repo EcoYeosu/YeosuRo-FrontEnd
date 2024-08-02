@@ -1,9 +1,6 @@
 import React from 'react'
 import { ICommunity } from '../../types/communityType'
 import { useRouter } from 'next/navigation';
-// travel : 숨은명소pick
-// freetalk : 자유톡
-
 
 interface FeedCardProps {
   data?: ICommunity[];

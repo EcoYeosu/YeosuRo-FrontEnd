@@ -8,7 +8,7 @@ export const useDeleteFeeds = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
   return useMutation({
-    mutationFn: ({id}: TFeedsRequestParams) => api.delete(`/goal/${id}`),
+    mutationFn: ({id}: TFeedsRequestParams) => api.delete(`/feeds/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['communDetail'] });
       router.push(`/community`);

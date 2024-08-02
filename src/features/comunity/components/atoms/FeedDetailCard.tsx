@@ -4,20 +4,25 @@ import useFormatDate from '@/hooks/useFormatData';
 import { usePostCommnet } from '../../hooks/usePostCommnet';
 import FeedComment from './FeedComment';
 import { useDeleteFeeds } from '../../hooks/useDeleteFeeds';
+import { useRouter } from 'next/navigation';
 
 interface FeedDetailCardProps {
   data: ICommunityDetail;
 }
 
 function FeedDetailCard({ data }: FeedDetailCardProps) {
-  const {id}= data
-  
+  const router = useRouter();
+  const { id } = data
   const { formatDate } = useFormatDate()
   const { mutate } = useDeleteFeeds()
   const handleDelete = () => {
-    if (!id) return;
-
-    mutate({id});
+    if (!id) {
+      return;
+    } else {
+      mutate({ id });
+      router.push('/comunity');
+    }
+    
   };
 
   return (
@@ -25,17 +30,17 @@ function FeedDetailCard({ data }: FeedDetailCardProps) {
       <div>
         <div>{data.title}</div>
         <div>{formatDate(data.createAt)}</div>
-        <div>
+        <div className='flex justify-between'>
           <div className='flex gap-1'>
             <div>{data.profileImageUrl}</div>
             <div>{data.nickname}</div>
             <div>{data.tier}</div>
           </div>
-          <div className='flex gap-1'>
-            <div>수정</div>
+          <div className='flex'>
+            <div className='mr-1'>수정</div>
             <button onClick={handleDelete}>삭제</button>
           </div>
-      </div>
+        </div>
         <div>
           <div>{data.imageUrl}</div>
           <div>{data.content}</div>
@@ -47,7 +52,7 @@ function FeedDetailCard({ data }: FeedDetailCardProps) {
         </div>
       </div>
       <div>
-        <FeedComment replies={data.replies}/>
+        <FeedComment feedId={id} replies={data.replies}/>
       </div>
     </div>
   )

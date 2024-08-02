@@ -22,7 +22,7 @@ export const usePostFeeds = () => {
 
   const uploadFiles = async (data: IFileUploadRequest) => {
     const formData = new FormData();
-    data.imageUrl.forEach(file => formData.append('files', file));
+    data.imageUrl.forEach(file => formData.append('imageUrl', file));
     formData.append('title', data.title);
     formData.append('content', data.content);
     const response = await api.post<IFileUploadResponse>('/feeds', formData);
