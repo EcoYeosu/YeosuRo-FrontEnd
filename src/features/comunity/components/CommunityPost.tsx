@@ -5,13 +5,13 @@ import React, { useState } from 'react'
 import { IFileUploadRequest, usePostFeeds } from '../hooks/usePostFeeds';
 import { useFileUpload } from '../hooks/useFileUpload';
 import Image from 'next/image';
+import Link from 'next/link';
 
 function CommunityPost() {
 
   const { previewUrls, onChangeFileHandler, isMaxFiles, uploadedUrls } = useFileUpload(5);
   const { values, handleChange } = useInput({ title: '', content: '' });
   const { mutate } = usePostFeeds();
-  console.log(uploadedUrls);
   
   const handleSubmitWithDescription = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,9 +23,15 @@ function CommunityPost() {
     mutate(data);
   };
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">게시글 작성하기</h1>
+    <div className="mx-auto p-4">      
       <form onSubmit={handleSubmitWithDescription} className="space-y-4">
+        <div className='flex justify-between'>
+          <div className='flex items-center'>
+            <Link href='/comunity'>뒤로가기</Link>
+            <h1 className="text-2xl font-bold mb-4">게시글 작성하기</h1>
+          </div>
+          <button className=" text-blue p-2 rounded">완료</button>
+        </div>
         <div className="flex items-center space-x-4">
           <label htmlFor="file-upload" className="cursor-pointer w-16 h-16 flex items-center justify-center rounded-full bg-gray-200 text-gray-500 text-3xl">
             +
@@ -69,11 +75,6 @@ function CommunityPost() {
           className="w-full p-2 border border-gray-300 rounded"
           rows={4}
         />
-        <button
-          className="w-full bg-blue-500 text-white p-2 rounded"
-        >
-          전송
-        </button>
       </form>
     </div>
   );
