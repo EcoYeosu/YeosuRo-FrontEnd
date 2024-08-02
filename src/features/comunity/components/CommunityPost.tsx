@@ -8,15 +8,15 @@ import Image from 'next/image';
 
 function CommunityPost() {
 
-  const { previewUrls, selectedFiles, handleFileChange, isMaxFiles } = useFileUpload(5);
+  const { previewUrls, onChangeFileHandler, isMaxFiles, uploadedUrls } = useFileUpload(5);
   const { values, handleChange } = useInput({ title: '', content: '' });
-
-
   const { mutate } = usePostFeeds();
+  console.log(uploadedUrls);
+  
   const handleSubmitWithDescription = (e: React.FormEvent) => {
     e.preventDefault();
     const data: IFileUploadRequest = {
-      imageUrl: selectedFiles,
+      imageUrl: uploadedUrls,
       title: values.title,
       content: values.content,
     };
@@ -34,7 +34,7 @@ function CommunityPost() {
             id="file-upload"
             type="file"
             multiple
-            onChange={handleFileChange}
+            onChange={onChangeFileHandler}
             className="hidden"
             style={{ display: 'none' }}
           />

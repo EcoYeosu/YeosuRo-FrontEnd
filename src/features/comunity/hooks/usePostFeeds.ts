@@ -14,7 +14,7 @@ interface IFileUploadResponse {
 export interface IFileUploadRequest {
   title: string;
   content: string;
-  imageUrl: File[];
+  imageUrl: string[];
 }
 
 export const usePostFeeds = () => {
