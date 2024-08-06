@@ -1,49 +1,61 @@
-import { useState } from 'react';
-import { api } from '@/apis';
+import { useState, useEffect } from 'react';
+import { useUploadFiles } from './useUploadFiles';
 
-export const useFileUpload = (maxFiles:number) => {
+export const useFileUpload = (maxFiles: number) => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [uploadedUrls, setUploadedUrls] = useState<string[]>([]);
   const [isMaxFiles, setIsMaxFiles] = useState<boolean>(false);
+  const [newFiles, setNewFiles] = useState<File[]>([]);
 
-  const uploadFile = async (file: File): Promise<string | null> => {
-    try {
-      const formData = new FormData();
-      formData.append('imageUrl', file);
-      const response = await api.post<{ imageUrl: string }>('/upload', formData);
-      return response.data.imageUrl;
-    } catch (error) {
-      console.error('Failed to upload file', error);
-      return null;
-    }
+  const { mutateAsync: uploadFiles } = useUploadFiles();
+
+  useEffect(() => {
+    const processNewFiles = async () => {
+      if (newFiles.length === 0) return;
+
+      const newPreviewUrls = createPreviewUrls(newFiles);
+      const newUploadedUrls = await uploadFiles(newFiles);
+
+      if (newUploadedUrls) {
+        updateState(newFiles, newPreviewUrls, newUploadedUrls);
+      }
+    };
+
+    processNewFiles();
+  }, [newFiles]);
+
+  const createPreviewUrls = (files: File[]): string[] => {
+    return files.map((file) => URL.createObjectURL(file));
   };
 
-  const onChangeFileHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newFiles = Array.from(e.target.files || []);
+  const updateState = (newFiles: File[], newPreviewUrls: string[], newUploadedUrls: string[]) => {
+    setSelectedFiles((prevFiles) => {
+      const updatedFiles = [...prevFiles, ...newFiles].slice(0, maxFiles);
+      setIsMaxFiles(updatedFiles.length >= maxFiles);
+      return updatedFiles;
+    });
 
-    if (selectedFiles.length + newFiles.length > maxFiles) {
+    setPreviewUrls((prevUrls) => {
+      const updatedPreviewUrls = [...prevUrls, ...newPreviewUrls].slice(0, maxFiles);
+      return updatedPreviewUrls;
+    });
+
+    setUploadedUrls((prevUrls) => {
+      const updatedUploadedUrls = [...prevUrls, ...newUploadedUrls].slice(0, maxFiles);
+      return updatedUploadedUrls;
+    });
+
+    setNewFiles([]);
+  };
+
+  const onChangeFileHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    if (selectedFiles.length + files.length > maxFiles) {
       // TODO: 최대 5장 toast 추가
       return;
     }
-
-    const validFilesPromises = newFiles.map(async file => {
-      const previewUrl = URL.createObjectURL(file);
-      const uploadedUrl = await uploadFile(file);
-      return { file, previewUrl, uploadedUrl };
-    });
-
-    const validFiles = (await Promise.all(validFilesPromises))
-      .filter(item => item.uploadedUrl !== null);
-
-    const updatedFiles = [...selectedFiles, ...validFiles.map(result => result.file as File)].slice(0, maxFiles);
-    const updatedPreviews = [...previewUrls, ...validFiles.map(result => result.previewUrl as string)].slice(0, maxFiles);
-    const updatedUrls = [...uploadedUrls, ...validFiles.map(result => result.uploadedUrl as string)].slice(0, maxFiles);
-
-    setSelectedFiles(updatedFiles);
-    setPreviewUrls(updatedPreviews);
-    setUploadedUrls(updatedUrls);
-    setIsMaxFiles(updatedFiles.length >= maxFiles);
+    setNewFiles(files);
   };
 
   return {
