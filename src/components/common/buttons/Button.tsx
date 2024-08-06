@@ -1,14 +1,14 @@
 import React, { ReactNode } from "react";
 
 type ButtonProps = {
-  children: ReactNode;
+  value: string;
   onClick?: () => void;
   size?: "small" | "medium" | "large";
   className?: string;
 };
 
 const Button: React.FC<ButtonProps> = ({
-  children,
+  value,
   onClick,
   size = "medium",
   className,
@@ -31,10 +31,9 @@ const Button: React.FC<ButtonProps> = ({
     <button
       onClick={onClick}
       className={`bg-blue-500 text-white
-       font-semibold rounded-lg
-        shadow-md hover:bg-blue-700 transition duration-300 active:bg-blue-900 ${sizeClass} ${className}`}
-    >
-      {children}
+       font-semibold active:bg-blue-900 ${sizeClass} ${className}`}
+       style={{ borderRadius:'4px' }}>
+      {value}
     </button>
   );
 };
