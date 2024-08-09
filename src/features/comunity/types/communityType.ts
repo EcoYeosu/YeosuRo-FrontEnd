@@ -4,13 +4,14 @@ export interface ICommunity {
   createAt: string;
   modifiedAt: string;
   feedCategory: string;
-  imageUrl: string;
+  imageUrls: string[];
   likesCount: number;
   memberID: number;
   nickname: string;
   profileImageUrl: string;
   repliesCount: number;
   tier: string;
+  view?: number;
 }
 
 export interface IReply {
