@@ -3,7 +3,7 @@ import React from 'react'
 
 function DetailBottomNavigation() {
   return (
-    <div className="fixed bottom-0 right-0 z-10 flex justify-center gap-[48px] w-full bg-white pt-5xs pb-xs px-xs shadow-thumb">
+    <div className="fixed bottom-0 right-0 flex justify-center gap-[48px] w-full bg-white pt-5xs pb-xs px-xs shadow-thumb">
       {/* TODO: ICON 및 디자인 변경 */}
       <Link href='/' className="flex flex-col items-center">
         home

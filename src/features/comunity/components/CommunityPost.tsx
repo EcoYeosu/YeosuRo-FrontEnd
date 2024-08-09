@@ -6,17 +6,19 @@ import { IFileUploadRequest, usePostFeeds } from '../hooks/usePostFeeds';
 import { useFileUpload } from '../hooks/useFileUpload';
 import Image from 'next/image';
 import Link from 'next/link';
+import useCommunityStore from '@/store/useCommunityStore';
 
 function CommunityPost() {
-
-  const { previewUrls, onChangeFileHandler, isMaxFiles, uploadedUrls } = useFileUpload(5);
+  const { category } = useCommunityStore();
+  const { previewUrls, onChangeFileHandler, uploadedUrls } = useFileUpload(5);
   const { values, handleChange } = useInput({ title: '', content: '' });
   const { mutate } = usePostFeeds();
   
   const handleSubmitWithDescription = (e: React.FormEvent) => {
     e.preventDefault();
     const data: IFileUploadRequest = {
-      imageUrl: uploadedUrls,
+      feedCategory: category,
+      imageUrls: uploadedUrls,
       title: values.title,
       content: values.content,
     };

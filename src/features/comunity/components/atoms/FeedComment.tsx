@@ -3,7 +3,7 @@
 import { useInput } from '@/hooks/useInput'
 import React from 'react'
 import { IReply } from '../../types/communityType'
-import { usePostCommnet } from '../../hooks/usePostCommnet';
+import { usePostCommnet } from '../../hooks/react-query/usePostCommnet';
 import AutoResizeTextarea from '@/components/common/textArea/AutoResizeTextArea';
 
 interface FeedCommentProps {
@@ -14,7 +14,6 @@ interface FeedCommentProps {
 function FeedComment({replies, feedId}: FeedCommentProps) {
   const { mutate } = usePostCommnet()
   const { values, handleChange } = useInput({comment: ''})
-  console.log(feedId)
   const handleSend = () => {
     if (values.comment) return mutate({ feedId:feedId, content: values.comment });
     else alert('댓글을 입력해주세요!')

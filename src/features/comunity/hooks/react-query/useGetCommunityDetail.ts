@@ -1,6 +1,6 @@
 import { api } from "@/apis"
 import { useQuery } from "@tanstack/react-query"
-import { ICommunityDetail } from "../types/communityType"
+import { ICommunityDetail } from "../../types/communityType"
 
 export const useGetCommunityDetailList = (id: number) => {
   return useQuery<ICommunityDetail>({
