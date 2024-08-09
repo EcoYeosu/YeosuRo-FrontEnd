@@ -3,20 +3,23 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import FeedCard from './atoms/FeedCard';
-import { useGetCommunityList } from '../hooks/useGetComunityList';
+import { useGetCommunityList } from '../hooks/react-query/useGetComunityList';
 import { BottomSheet } from '@/components/common/bottomSheet/Bottomsheet';
 import DetailBottomNavigation from '@/components/common/bottomNavigation/DetailBottomNavigation';
+import useCommunityStore from '@/store/useCommunityStore';
+import CategoryBottomSheet from './atoms/CategoryBottomSheet';
 
 // TODO: 인기글, 여수랑 추가 예정
-const CATEGORYLIST = [
+export const CATEGORYLIST = [
   { id: 1, title: 'travel' },
   { id: 2, title: 'free_talk' }
 ] as const
 
 function Community() {
   const router = useRouter();
-  const [category, setCategory] = useState('travel');
-  const { data, isLoading, error } = useGetCommunityList(category);
+  const { category, setCategory } = useCommunityStore();
+  const { data } = useGetCommunityList(category);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
@@ -33,11 +36,19 @@ function Community() {
     router.push(newUrl.toString());
   };
 
+  const handleOpenSheet = () => {
+    setIsSheetOpen(true);
+  };
+
+  const handleCloseSheet = () => {
+    setIsSheetOpen(false);
+  };
+
   return (
-    <div className='min-h-screen'>
+    <div className='min-h-screen ov'>
       <div className='flex justify-between'>
         <h1>커뮤니티</h1>
-        <button onClick={() => router.push('/comunity/post')}>글작성</button>
+        <button onClick={handleOpenSheet}>글작성</button>
       </div>
       <div>
         {CATEGORYLIST.map((item) =>
@@ -51,6 +62,7 @@ function Community() {
       </div>
       <FeedCard data={data} />
       <DetailBottomNavigation />
+      <CategoryBottomSheet open={isSheetOpen} onDismiss={handleCloseSheet} />
     </div>
   );
 }
