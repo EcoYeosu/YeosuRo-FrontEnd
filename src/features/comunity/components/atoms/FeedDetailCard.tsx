@@ -1,9 +1,9 @@
 import React from 'react'
 import {ICommunityDetail } from '../../types/communityType'
 import useFormatDate from '@/hooks/useFormatData';
-import { usePostCommnet } from '../../hooks/usePostCommnet';
+import { usePostCommnet } from '../../hooks/react-query/usePostCommnet';
 import FeedComment from './FeedComment';
-import { useDeleteFeeds } from '../../hooks/useDeleteFeeds';
+import { useDeleteFeeds } from '../../hooks/react-query/useDeleteFeeds';
 import { useRouter } from 'next/navigation';
 
 interface FeedDetailCardProps {

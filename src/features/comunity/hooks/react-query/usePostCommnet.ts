@@ -1,6 +1,6 @@
 import { api } from "@/apis"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { ICommunity } from "../types/communityType"
+import { ICommunity } from "../../types/communityType"
 
 interface ICommentRequest {
   feedId: number

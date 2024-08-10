@@ -1,6 +1,6 @@
 'use client';
 
-import { useGetCommunityDetailList } from '../hooks/useGetCommunityDetail';
+import { useGetCommunityDetailList } from '../hooks/react-query/useGetCommunityDetail';
 import FeedDetailCard from './atoms/FeedDetailCard';
 
 function CommunityDetail({id} : { id:number }) {
