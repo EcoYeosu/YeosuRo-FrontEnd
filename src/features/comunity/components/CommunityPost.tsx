@@ -2,7 +2,7 @@
 
 import { useInput } from '@/hooks/useInput';
 import React, { useState } from 'react'
-import { IFileUploadRequest, usePostFeeds } from '../hooks/usePostFeeds';
+import { IFileUploadRequest, usePostFeeds } from '../hooks/react-query/usePostFeeds';
 import { useFileUpload } from '../hooks/useFileUpload';
 import Image from 'next/image';
 import Link from 'next/link';

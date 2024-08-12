@@ -1,3 +1,4 @@
+
 import { api } from '@/apis';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
@@ -23,15 +24,10 @@ export const usePostFeeds = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const uploadFiles = async (data: IFileUploadRequest) => {
-    const response = await api.post<IFileUploadResponse>('/feeds', data);
-    return response.data;
-  };
-
   return useMutation<IFileUploadResponse, Error, IFileUploadRequest>({
-    mutationFn: uploadFiles,
+    mutationFn: (data: IFileUploadRequest) => api.post<IFileUploadResponse>('/feeds', data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['uploads','community'] })
+      queryClient.invalidateQueries({ queryKey: ['uploads', 'community'] })
       router.push('/comunity')
     }
   })
