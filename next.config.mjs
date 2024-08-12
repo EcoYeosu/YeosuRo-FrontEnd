@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['yeosuroimage.s3.ap-northeast-2.amazonaws.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'yeosuroimage.s3.ap-northeast-2.amazonaws.com',
+        pathname: '**',
+      },
+    ],
   },
   reactStrictMode: true,
 };
