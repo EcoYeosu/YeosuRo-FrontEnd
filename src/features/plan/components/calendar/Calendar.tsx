@@ -12,7 +12,8 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const CustomCalendar = () => {
 
-    const [value, onChange] = useState<Value>(new Date());
+    const [value, setValue] = useState<Value>(new Date());
+    const [activeStartDate, setActiveStartDate] = useState(new Date());
     const [isClient, setIsClient] = useState(false)
 
     const currentMonth = (value as Date).toLocaleString('en', { month: 'short' });
@@ -21,61 +22,72 @@ const CustomCalendar = () => {
     const handlePrevMonth = () => {
         const newDate = new Date(value as Date);
         newDate.setMonth(newDate.getMonth() - 1);
-        onChange(newDate);
+        setValue(newDate);
+        setActiveStartDate(newDate)
     };
 
     const handleNextMonth = () => {
         const newDate = new Date(value as Date);
         newDate.setMonth(newDate.getMonth() + 1);
-        onChange(newDate);
+        setValue(newDate);
+        setActiveStartDate(newDate)
     };
 
     const handlePrevYear = () => {
         const newDate = new Date(value as Date);
         newDate.setFullYear(newDate.getFullYear() - 1);
-        onChange(newDate);
+        setValue(newDate);
+        setActiveStartDate(newDate)
     };
 
     const handleNextYear = () => {
         const newDate = new Date(value as Date);
         newDate.setFullYear(newDate.getFullYear() + 1);
-        onChange(newDate);
+        setValue(newDate);
+        setActiveStartDate(newDate)
     };
 
     useEffect(() => {
         setIsClient(true)
+        console.log(value)
       }, [])
     
     return (
         <div style={{ width: '320px', margin:'0 auto'}}>
+                <div className={`font-regular`} style={{ width: '100%',lineHeight:'44px', margin:'24px 0 12px 0', background:'#F6F6F6' }}>
+                    <p style={{ padding: '0 16px' }}>
+                        {value instanceof Date ? `${value.getFullYear()}. ${String(value.getMonth() + 1).padStart(2, '0')}. ${String(value.getDate()).padStart(2, '0')}` : ''}
+                    </p>
+                </div>
             <div className='w-full flex' style={{ justifyContent:'space-between' }}>
                 <div className='flex justify-between items-center'>
-                    <div>
-                        <BackArrow onClick={handlePrevMonth} />
+                    <div onClick={handlePrevMonth}>
+                        <BackArrow />
                     </div>
                     <p style={{color:'#949494'}}>{currentMonth}</p>
-                    <div>
-                        <NextArrow onClick={handleNextMonth} />
+                    <div  onClick={handleNextMonth}>
+                        <NextArrow />
                     </div>
                 </div>
                 <div className='flex justify-between items-center'>
-                    <div>
-                        <BackArrow onClick={handlePrevYear} />
+                    <div  onClick={handlePrevYear}>
+                        <BackArrow />
                     </div>
                     <p style={{color:'#949494'}}>{currentYear}</p>
-                    <div>
-                        <NextArrow onClick={handleNextYear} />
+                    <div  onClick={handleNextYear}>
+                        <NextArrow />
                     </div>
                 </div>
             </div>
             <div style={{marginBottom:'24px'}}>
                 {isClient &&
                     <Calendar
-                        onChange={onChange}
+                        onChange={setValue}
                         value={value}
                         formatDay={(locale, date) => date.toLocaleString("en", {day: "numeric"})}
-                        showNavigation={false}
-                    />
+                        showNavigation={false}  
+                        activeStartDate={activeStartDate}         
+                     />
                 }
             </div>
         </div>

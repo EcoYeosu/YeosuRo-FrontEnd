@@ -4,9 +4,14 @@ import ListHeader from '@/features/plan/components/headers/ListHeader'
 import MyPlanCard from '@/features/plan/components/card/MyPlanCard'
 import AddPlanCard from '@/features/plan/components/card/AddPlanCard'
 import { useGetPlanList } from '@/features/plan/hooks/useGetPlanList';
-
+import { useRouter } from "next/navigation";
   
 const MyPlan = () => {
+
+    const router = useRouter();
+    const nextPage = () => {
+        router.push(`/plan/add`);
+    }
 
     const { data, isLoading, error } = useGetPlanList();
 
@@ -17,13 +22,17 @@ const MyPlan = () => {
         <div style={{ width: '360px', margin:'0 auto'}}>
             <ListHeader/>
             <div style={{display:'flex', flexDirection:'column', gap:'12px', alignItems:'center', marginTop:'24px'}}>
-                {data.map((item:any) =>
-                  <MyPlanCard title={item.title} startDate={item.startDate && item.startDate} finishDate={item.finishDate && item.finishDate} key={item.id && item.id}/>
+                {data.data.map((item:any) =>
+                  <MyPlanCard 
+                    title={item.title} 
+                    startDate={item.startDate} 
+                    finishDate={item.finishDate} 
+                    key={item.id}/>
                 )}
-                <AddPlanCard />
+                <AddPlanCard onClick={nextPage}/>
             </div>
         </div>
     )
 };
 
-export default MyPlan
+export default MyPlan;
