@@ -1,0 +1,41 @@
+/* styles/ToggleSwitch.module.css */
+
+.toggleContainer {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .toggleCheckbox {
+    display: none;
+  }
+  
+  .toggleLabel {
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    background-color: #ccc;
+    border-radius: 34px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .toggleSlider {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 26px;
+    height: 26px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+  }
+  
+  .toggleCheckbox:checked + .toggleLabel {
+    background-color: #4caf50;
+  }
+  
+  .toggleCheckbox:checked + .toggleLabel .toggleSlider {
+    transform: translateX(26px);
+  }
+  
