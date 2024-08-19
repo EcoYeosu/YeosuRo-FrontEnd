@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>home</div>;
+  return <div className="w-full h-[100dvh] flex flex-col items-center ">home</div>;
 }
