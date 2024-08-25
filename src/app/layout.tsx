@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ReactQueryProviders from "./provider";
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_JS_KEY}&autoload=false`}
+          strategy="beforeInteractive"
+        />
+      </head>
       <body className={inter.className}>
         <ReactQueryProviders>
           <div className="layout">{children}</div>

@@ -1,0 +1,48 @@
+/* Calendar.css */
+
+    /* 달력 전체 style*/
+    .react-calendar {
+        width: 320px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    /* 요일 밑줄 제거 */
+    .react-calendar__month-view__weekdays abbr {
+        display: block;
+        text-decoration: none;
+        text-align: center;
+        line-height:48px;
+        font-weight: 600;
+    }
+
+    /* 일자 */
+    .react-calendar__tile {
+        font-size: 16px;
+        margin:2px 0px;
+        color:#1f1f1f;
+        font-weight: 600;
+    }
+
+    /* 일자 > 숫자 */
+    .react-calendar__tile abbr {
+        display: block;
+        width:40px;
+        line-height:40px;
+        border-radius: 50%;
+        margin: 0 auto
+    }
+
+    /* 현재 선택된 달의 일자를 제외한 일자 */
+    .react-calendar__month-view__days__day--neighboringMonth{
+        color:#949494;
+    }
+    
+      /* 선택한 날짜 스타일 적용 */
+    .react-calendar__tile abbr:enabled:focus,
+    .react-calendar__tile--active abbr{
+        background:#0D74DB;
+        border-radius: 100%;
+        color:#ffffff;
+    }
+
+  
