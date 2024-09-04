@@ -1,19 +1,19 @@
-'use client';
+// 'use client';
 
-import { useGetCommunityDetailList } from '../hooks/react-query/useGetCommunityDetail';
-import FeedDetailCard from './atoms/FeedDetailCard';
+// import { useGetCommunityDetailList } from '../hooks/react-query/useGetCommunityDetail';
+// import FeedDetailCard from './atoms/FeedDetailCard';
 
-function CommunityDetail({id} : { id:number }) {
-  const { data, isLoading, error } = useGetCommunityDetailList(id);
+// function CommunityDetail({id} : { id:number }) {
+//   const { data, isLoading, error } = useGetCommunityDetailList(id);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error || !data) return <div>No Data</div>;
+//   if (isLoading) return <div>Loading...</div>;
+//   if (error || !data) return <div>No Data</div>;
 
-  return (
-    <div>
-      <FeedDetailCard data={data} />
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <FeedDetailCard data={data} />
+//     </div>
+//   );
+// }
 
-export default CommunityDetail;
+// export default CommunityDetail;
