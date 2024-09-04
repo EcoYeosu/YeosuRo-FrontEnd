@@ -6,7 +6,7 @@ import AddPlanCard from '@/features/plan/components/card/AddPlanCard'
 import { useGetPlanList } from '@/features/plan/hooks/useGetPlanList';
 import { useRouter } from "next/navigation";
   
-const MyPlan = () => {
+const Plan = () => {
 
     const router = useRouter();
     const nextPage = () => {
@@ -35,4 +35,4 @@ const MyPlan = () => {
     )
 };
 
-export default MyPlan;
+export default Plan;

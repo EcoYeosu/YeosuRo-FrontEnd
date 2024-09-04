@@ -7,7 +7,7 @@ import Cancell from '@/features/login/images/CancelIcon.svg';
 import Checkbox from '@/features/login/images/checkbox.svg';
 import { useRouter } from "next/navigation";
 
-const Home: React.FC = () => {
+const Email: React.FC = () => {
 
   const router = useRouter();
   const nextPage = () => {
@@ -132,4 +132,4 @@ const styles = {
   },
 };
 
-export default Home;
+export default Email;
