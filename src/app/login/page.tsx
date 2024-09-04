@@ -9,7 +9,7 @@ import Email from '@/features/login/images/email.svg';
 import { useRouter } from "next/navigation";
 
 
-const Home: React.FC = () => {
+const Login: React.FC = () => {
 
   const router = useRouter();
   const nextPage = () => {
@@ -126,4 +126,4 @@ const styles = {
   },
 };
 
-export default Home;
+export default Login;

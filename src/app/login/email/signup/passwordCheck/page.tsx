@@ -9,7 +9,7 @@ import BlindIcon from '@/features/login/images/blindIcon.svg';
 import VisibleIcon from '@/features/login/images/visibleIcon.svg';
 import { useRouter } from "next/navigation";
 
-const Home: React.FC = () => {
+const PasswordCheck: React.FC = () => {
 
   const router = useRouter();
   const nextPage = () => {
@@ -127,4 +127,4 @@ const styles: any = {
   },
 };
 
-export default Home;
+export default PasswordCheck;

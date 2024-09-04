@@ -7,7 +7,7 @@ import BackIcon from '@/features/login/images/backIcon.svg';
 import NextIcon from '@/features/login/images/nextIcon.svg';
 import { useRouter } from "next/navigation";
 
-const Home: React.FC = () => {
+const SignUp: React.FC = () => {
 
   const router = useRouter();
   const nextPage = () => {
@@ -133,4 +133,4 @@ const styles = {
   },
 };
 
-export default Home;
+export default SignUp;
