@@ -1,12 +1,11 @@
-// import CommunityPost from '@/features/comunity/components/CommunityPost'
-// import React from 'react'
+import * as React from "react";
 
-// function page() {
-//   return (
-//     <div>
-//       <CommunityPost/>
-//     </div>
-//   )
-// }
+const ComunuityPost = () => {
+  return (
+    <div className="w-360 mx-auto border border-1 border-black ">
+        커뮤니티post
+    </div>
+  );
+};
 
-// export default page
+export default ComunuityPost;
