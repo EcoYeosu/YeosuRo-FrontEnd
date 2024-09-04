@@ -50,7 +50,7 @@ const CustomCalendar = () => {
     useEffect(() => {
         setIsClient(true)
         console.log(value)
-      }, [])
+      }, [value])
     
     return (
         <div style={{ width: '320px', margin:'0 auto'}}>
