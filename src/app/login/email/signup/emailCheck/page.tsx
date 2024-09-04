@@ -1,20 +1,37 @@
 'use client'
 
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Checkbox from '@/features/login/images/checkbox.svg';
 import BackIcon from '@/features/login/images/backIcon.svg';
 import CancelIcon from '@/features/login/images/CancelIcon.svg';
 import { useRouter } from "next/navigation";
 
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { signUpState } from '@/app/recoil/atoms';
+
 
 const EmailCheck: React.FC = () => {
+
+  const [email, setEmail] = useState<string | undefined>('');
 
   const router = useRouter();
   const nextPage = () => {
       router.push(`/login/email/signup/passwordCheck`);
   }
 
+  const setUserState = useSetRecoilState(signUpState);
+  const currentSignUpState = useRecoilValue(signUpState);
+
+  const updateEmaildRecoil = () => {
+    setUserState((prevState) => ({
+      ...prevState,
+      email,
+    }));
+    nextPage()
+    console.log(currentSignUpState)
+  };
+  
   return (
     <>
       <Head>
@@ -31,14 +48,14 @@ const EmailCheck: React.FC = () => {
             <div style={styles.inputboxContainer}>
                 <p>이메일</p>
                 <div style={styles.textInputBox}>
-                    <input style={styles.textInput} type="email" placeholder="이메일"/>
+                    <input style={styles.textInput} type="email" placeholder="이메일" onChange={(e) => setEmail(e.target.value)}/>
                     <button style={styles.authButton}>인증</button>
                 </div>
                 <div style={styles.textInputBox}>
                     <input style={styles.textInput} type="password" placeholder="인증번호 입력"/>
                 </div>
             </div>
-            <button onClick={nextPage} style={styles.nextButton}>다음</button>
+            <button onClick={updateEmaildRecoil} style={styles.nextButton}>다음</button>
         </div>
       </div>
     </>

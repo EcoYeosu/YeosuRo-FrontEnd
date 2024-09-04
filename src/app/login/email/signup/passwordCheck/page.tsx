@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, {useState} from 'react';
 import Head from 'next/head';
 import BackIcon from '@/features/login/images/backIcon.svg';
 import CancelIcon from '@/features/login/images/CancelIcon.svg';
@@ -9,12 +9,29 @@ import BlindIcon from '@/features/login/images/blindIcon.svg';
 import VisibleIcon from '@/features/login/images/visibleIcon.svg';
 import { useRouter } from "next/navigation";
 
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { signUpState } from '@/app/recoil/atoms';
+
 const PasswordCheck: React.FC = () => {
+
+  const [password, setPassword] = useState<string | undefined>('');
 
   const router = useRouter();
   const nextPage = () => {
-      router.push(`/login/email/signup/emailCheck`);
+      router.push(`/login/email/signup/passwordCheck`);
   }
+
+  const setUserState = useSetRecoilState(signUpState);
+  const currentSignUpState = useRecoilValue(signUpState);
+
+  const updatePasswordRecoil = () => {
+    setUserState((prevState) => ({
+      ...prevState,
+      password,
+    }));
+    nextPage()
+    console.log(currentSignUpState)
+  };
 
   return (
     <>
@@ -32,7 +49,7 @@ const PasswordCheck: React.FC = () => {
             <div style={styles.inputboxContainer}>
                 <p>비밀번호</p>
                 <div style={styles.textInputBox}>
-                    <input style={styles.textInput} type="email" placeholder="비밀번호를 입력하세요."/>
+                    <input style={styles.textInput} type="email" placeholder="비밀번호를 입력하세요." onChange={(e) => setPassword(e.target.value)}/>
                     <BlindIcon style={styles.blindButton} />
                 </div>
                 <div style={styles.checkText}>
@@ -44,7 +61,7 @@ const PasswordCheck: React.FC = () => {
                   <p>8자 이상</p>
                 </div>
             </div>
-            <button style={styles.nextButton}>다음</button>
+            <button onClick={updatePasswordRecoil} style={styles.nextButton}>다음</button>
         </div>
       </div>
     </>
