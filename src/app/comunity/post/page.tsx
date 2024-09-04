@@ -1,12 +1,12 @@
-import CommunityPost from '@/features/comunity/components/CommunityPost'
-import React from 'react'
+// import CommunityPost from '@/features/comunity/components/CommunityPost'
+// import React from 'react'
 
-function page() {
-  return (
-    <div>
-      <CommunityPost/>
-    </div>
-  )
-}
+// function page() {
+//   return (
+//     <div>
+//       <CommunityPost/>
+//     </div>
+//   )
+// }
 
-export default page
+// export default page
