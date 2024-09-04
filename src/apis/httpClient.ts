@@ -6,9 +6,10 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 
-const getResult = (response: AxiosResponse) => response.data;
 
 function HttpClient(config?: AxiosRequestConfig) {
+  
+  const getResult = (response: AxiosResponse) => response.data;
   const client: AxiosInstance = axios.create(config);
   const token = '';
 
