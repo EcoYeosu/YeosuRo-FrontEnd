@@ -6,7 +6,7 @@ import Checkbox from '@/features/login/images/checkbox.svg';
 import BackIcon from '@/features/login/images/backIcon.svg';
 import CancelIcon from '@/features/login/images/CancelIcon.svg';
 import { useRouter } from "next/navigation";
-
+import { CSSProperties } from 'react';
 const Home: React.FC = () => {
 
   const router = useRouter();
@@ -44,7 +44,7 @@ const Home: React.FC = () => {
   );
 };
 
-const styles = {
+const styles: any = {
   container: {
     width: '360px',
     display: 'flex',

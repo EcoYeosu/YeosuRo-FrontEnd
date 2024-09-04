@@ -51,7 +51,7 @@ const Home: React.FC = () => {
   );
 };
 
-const styles = {
+const styles: any = {
   container: {
     width: '360px',
     display: 'flex',
