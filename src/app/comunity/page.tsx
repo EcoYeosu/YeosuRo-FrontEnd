@@ -1,12 +1,11 @@
-// import Community from "@/features/comunity/components/Community";
-// import React from "react";
+import * as React from "react";
 
-// function page() {
-//   return (
-//     <div>
-//       <Community/>
-//     </div>
-//   );
-// }
+const Comunuity = () => {
+  return (
+    <div className="w-360 mx-auto border border-1 border-black ">
+        커뮤니티
+    </div>
+  );
+};
 
-// export default page;
+export default Comunuity;
