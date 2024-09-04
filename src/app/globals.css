@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer base {
+
+  /* layout */
+  :root {
+    --layout-max-w: 500px;
+    --layout-min-w:360px;
+    --layout-min-h: 100dvh;
+    --rsbs-max-w: 500px;
+    --rsbs-ml: auto;
+    --rsbs-mr: auto;
+    --rsbs-overlay-rounded: 16px;
+  }
+
+  .layout {
+    @apply max-w-[var(--layout-max-w)] min-h-[var(--layout-min-h)] min-w-[var(--layout-min-w)] w-full mx-auto;
+    overflow-x: hidden;
+  }
+
+}
+::-webkit-scrollbar {
+  display: none;
+}
