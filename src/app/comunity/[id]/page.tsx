@@ -1,18 +1,12 @@
-// import CommunityDetail from '@/features/comunity/components/CommunityDetail'
-// import React from 'react'
+import * as React from "react";
 
-// export interface CommunityDetailParams  {
-//   params:{id:string}
-// }
+const ComunuityId = () => {
+  return (
+    <div className="w-360 mx-auto border border-1 border-black ">
+        커뮤니티[id]
+    </div>
+  );
+};
 
-// function page({ params: { id } }: CommunityDetailParams) {
-//   const numericId = Number(id);
+export default ComunuityId;
 
-//   return (
-//     <div>
-//       <CommunityDetail id={numericId} />
-//     </div>
-//   )
-// }
-
-// export default page
