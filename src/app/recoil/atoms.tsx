@@ -19,6 +19,7 @@ export const signUpState = atom<SignUpState>({
       email: undefined,
       password: undefined,
       nickname: undefined,
+      agree: undefined,
     },
     effects_UNSTABLE: [persistAtom],
 });
