@@ -5,9 +5,11 @@ import TitleHeader from "@/features/plan/components/headers/TitleHeader";
 import { useRouter } from "next/navigation";
 import KakaoMap from "@/components/kakao/KakaoMap";
 import Toggle from "@/features/plan/components/toggle/toggle"
+import BottomSheet from "@/components/common/bottomSheet/Bottomsheet";
+
 
 const PlanTypeFree= () => {
-    
+
     const router = useRouter();
     const nextPage = () => {
         router.push(`/plan/add/type/free`);
@@ -36,7 +38,7 @@ const PlanTypeFree= () => {
                     </div>
                 </div>
                 <Button value={'일정 추가하기'} className={'w-full mb-3'} onClick={nextPage}/>
-                <Button value={'다음날 추가하기'} className={'w-full bg-white text-[#0D74DB] border border-[#C8C8C8] border-[1px]'}/>
+                <BottomSheet />
             </div>
         </div>
     )

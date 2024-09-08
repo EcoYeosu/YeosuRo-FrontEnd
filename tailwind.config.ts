@@ -22,6 +22,9 @@ const config: Config = {
       animation: {
         'slide-down': 'slide-down 0.5s ease-out',
       },
+      colors:{
+        mainBlue: '#0D74DB',
+      }
     },
   },
   plugins: [],
