@@ -2,65 +2,20 @@
 
 import Button from "@/components/common/buttons/Button";
 import TitleHeader from "@/features/plan/components/headers/TitleHeader";
-import { useEffect, useState } from 'react';
-import { useRouter } from "next/navigation";
 import KakaoMap from "@/components/kakao/KakaoMap";
 import Toggle from "@/features/plan/components/toggle/toggle"
 import BottomSheet from "@/components/common/bottomSheet/Bottomsheet";
-import { useSearchParams } from 'next/navigation';
+import { useRecoilValue } from 'recoil';
+import { editPageData } from '@/app/recoil/atoms';
+import { useEffect } from "react";
 
 
 const PlanEdit= () => {
-
-    const router = useRouter();
-
-    const nextPage = () => {
-        router.push(`/plan/add/free`);
-    }
-
-    const searchParams = useSearchParams(); // searchParams 훅을 사용해 쿼리 파라미터 가져오기
-    const [queryData, setQueryData] = useState({
-        userId: '',
-        id: '',
-        memo: '',
-        latitude: '',
-        longitude: '',
-        address: '',
-        startTime: '',
-        endTime: '',
-    });
+    const siteList = useRecoilValue(editPageData);
 
     useEffect(() => {
-        if (searchParams) {
-            const userId = searchParams.get('userId');
-            const id = searchParams.get('id');
-            const memo = searchParams.get('memo');
-            const latitude = searchParams.get('latitude');
-            const longitude = searchParams.get('longitude');
-            const address = searchParams.get('address');
-            const startTime = searchParams.get('startTime');
-            const endTime = searchParams.get('endTime');
-
-            setQueryData({
-                userId: userId || '',
-                id: id || '',
-                memo: memo || '',
-                latitude: latitude || '',
-                longitude: longitude || '',
-                address: address || '',
-                startTime: startTime || '',
-                endTime: endTime || '',
-            });
-        }
-    }, [searchParams]);
-    
-    // query에서 전달된 데이터 사용
-    // const { userId, title, startDate, endDate } = query;
-
-    // console.log('userId:', userId);
-    // console.log('title:', title);
-    // console.log('startDate:', startDate);
-    // console.log('endDate:', endDate);
+        console.log(siteList);
+    }, []);
     
     return (
         <div style={{ width: '360px', margin:'0 auto' }}>
@@ -84,7 +39,7 @@ const PlanEdit= () => {
                     <div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-17px] w-0 h-0 border-l-[4.5px] border-l-transparent border-r-[4.5px] border-r-transparent border-t-[17px] border-t-blue-100 ">
                     </div>
                 </div>
-                <Button value={'일정 추가하기'} className={'w-full mb-3'} onClick={nextPage}/>
+                <Button value={'일정 추가하기'} className={'w-full mb-3'}/>
                 <BottomSheet />
             </div>
         </div>

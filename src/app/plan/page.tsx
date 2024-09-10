@@ -5,6 +5,8 @@ import MyPlanCard from '@/features/plan/components/card/MyPlanCard'
 import AddPlanCard from '@/features/plan/components/card/AddPlanCard'
 import { useGetPlanList } from '@/features/plan/hooks/useGetPlanList';
 import { useRouter } from "next/navigation";
+import { useSetRecoilState } from 'recoil';
+import { editPageData } from '../recoil/atoms';
   
 const Plan = () => {
 
@@ -32,29 +34,23 @@ const Plan = () => {
       }
 
     const router = useRouter();
-    const nextPage = () => {
-        router.push(`/plan/edit`);
+    const addPage = () => {
+        router.push(`/plan/add`);
     }
-    // const editPage = (userId: number, Site: Site[]) => {
-    
-    //     router.push({
-    //         pathname: `/plan/edit?planId=${item.userId}`, // 경로에 planId 추가
-    //         query: {
-    //             userId: userId.toString(),  // userId를 문자열로 변환
-    //             id: Site.id.toString(),  // id를 문자열로 변환
-    //             memo: Site.memo || '',  // memo가 null일 경우 빈 문자열로 처리
-    //             latitude: Site.latitude || '',  // latitude가 null일 경우 빈 문자열로 처리
-    //             longitude: Site.longitude || '',  // longitude가 null일 경우 빈 문자열로 처리
-    //             address: Site.address || '',  // address가 null일 경우 빈 문자열로 처리
-    //             startTime: Site.startTime ? Site.startTime.toString() : '',  // startTime이 null일 경우 빈 문자열로 처리
-    //             endTime: Site.endTime ? Site.endTime.toString() : '',  // endTime이 null일 경우 빈 문자열로 처리
-    //         },
-    //     });
-    // };
-    
+
+    const setSiteList = useSetRecoilState(editPageData); // 상태 설정만
+
+    const saveList = (siteList:Site[]) => {
+      setSiteList(siteList);  // Recoil에 siteList 저장
+    };
+    const editPage = (siteList:Site[]) => {
+      saveList(siteList)
+      router.push(`/plan/edit`);
+    }
 
     const { data, isLoading, error } = useGetPlanList();
 
+    
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 
@@ -68,10 +64,10 @@ const Plan = () => {
                     startDate={item.startDate} 
                     endDate={item.endDate} 
                     key={item.userId}
-                    // onClick={() => editPage(item.userId, item.siteList)}
+                    editPage={()=>editPage(item.siteList)}
                     />
                 )}
-                <AddPlanCard onClick={nextPage}/>
+                <AddPlanCard onClick={addPage}/>
             </div>
         </div>
     )
