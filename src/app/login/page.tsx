@@ -8,13 +8,19 @@ import Kakao from '@/features/login/images/kakao.svg';
 import Email from '@/features/login/images/email.svg';
 import { useRouter } from "next/navigation";
 
-
 const Login: React.FC = () => {
 
   const router = useRouter();
   const nextPage = () => {
       router.push(`/login/email`);
   }
+
+  // 백엔드의 카카오 OAuth2 인증 경로로 로그인 요청
+  const KAKAO_AUTH_URL = 'http://3.39.101.251:8080/oauth2/authorization/kakao';
+
+  const loginHandler = () => {
+    window.location.href = KAKAO_AUTH_URL;
+  };
 
   return (
     <>
@@ -29,7 +35,7 @@ const Login: React.FC = () => {
             <p style={styles.subtitle}>여수 자전거 여행의 더 많은 정보<br/> 확인하세요!</p>
             <div style={styles.buttonContainer}>
                 <button style={styles.googleButton}><Google style={styles.icon} />Google로 시작하기</button>
-                <button style={styles.kakaoButton}><Kakao style={styles.icon} />카카오톡으로 시작하기</button>
+                <button onClick={loginHandler} style={styles.kakaoButton}><Kakao style={styles.icon} />카카오톡으로 시작하기</button>
                 <button onClick={nextPage} style={styles.emailButton}><Email style={styles.icon2} />이메일로 시작하기</button>
             </div>
         </div>
