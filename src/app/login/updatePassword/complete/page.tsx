@@ -1,17 +1,18 @@
 'use client'
 
-import React, { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import { useRouter } from "next/navigation";
+import Image from 'next/image'; // next/image 사용
+import checkImage from '@/features/login/images/Rectangle 284.png';
 
 const Complete: React.FC = () => {
 
   const router = useRouter();
   const nextPage = () => {
-      router.push(`/login/email`);
+    router.push(`/login/email`);
   }
 
-  
   return (
     <>
       <Head>
@@ -20,11 +21,21 @@ const Complete: React.FC = () => {
       </Head>
       <div style={styles.container}>
         <div style={{width:'320px',margin:'0 auto'}}>
-            <div style={styles.headerBox}>
-            </div>
-            <p style={styles.welcomeText}>비밀번호 재설정이 <br/>완료됐어요 😉</p>
-            <div style={{ marginBottom: '245px' }}></div> 
-            <button onClick={nextPage} style={styles.nextButton}>로그인 화면으로 돌아가기</button>
+          <div style={styles.headerBox}></div>
+          
+          <p style={styles.welcomeText}>비밀번호 재설정이 <br />완료됐어요 😉</p>
+          
+          <div style={styles.imageWrapper}>
+            <Image
+              src={checkImage}
+              alt="Check Icon"
+              width={150}
+              height={150}
+              style={styles.image}
+            />
+          </div>
+
+          <button onClick={nextPage} style={styles.nextButton}>로그인 화면으로 돌아가기</button>
         </div>
       </div>
     </>
@@ -39,7 +50,7 @@ const styles: any = {
     alignItems: 'center',
     margin:'0 auto',
   },
-  headerBox:{
+  headerBox: {
     display:'flex',
     alignItems:'center',
     justifyContent:'space-between'
@@ -52,8 +63,21 @@ const styles: any = {
     margin: '24px 0',
     lineHeight: '140%',
     letterSpacing: '-0.011em',
+    marginBottom: '40px',
+    marginTop: '40px',
   },
-  
+  imageWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '24px 0',
+  },
+  image: {
+    width: '150px',
+    height: '150px',
+    objectFit: 'contain',
+    marginBottom: '100px',
+  },
   nextButton: {
     width:'100%',
     height:'48px',
