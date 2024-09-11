@@ -10,8 +10,7 @@ const OAuthCallback: React.FC = () => {
   useEffect(() => {
     const fetchTokens = async () => {
       try {
-        // 서버의 /login/oauth/callback API로 GET 요청 보내기
-        const response = await axios.get('http://3.39.101.251:8080/login/oauth/callback', {
+        const response = await axios.get('${process.env.NEXT_PUBLIC_BASE_URL}login/oauth/callback', {
           withCredentials: true,
         });
 

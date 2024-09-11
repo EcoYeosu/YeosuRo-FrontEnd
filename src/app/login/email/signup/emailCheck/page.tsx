@@ -50,7 +50,7 @@ const EmailCheck: React.FC = () => {
     }
 
     try {
-      const response = await fetch(`http://3.39.101.251:8080/sign-up/mailSend?mail=${email}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}sign-up/mailSend?mail=${email}`, {
         method: 'POST',
       });
       if (response.ok) {
@@ -72,7 +72,7 @@ const EmailCheck: React.FC = () => {
 
   const handleNext = async () => {
     try {
-      const response = await fetch(`http://3.39.101.251:8080/sign-up/mailCheck?code=${authCode}&type=${email}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}sign-up/mailCheck?code=${authCode}&type=${email}`, {
         method: 'GET',
       });
       if (response.ok) {
