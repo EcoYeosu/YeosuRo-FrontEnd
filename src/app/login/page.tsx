@@ -22,6 +22,13 @@ const Login: React.FC = () => {
     window.location.href = KAKAO_AUTH_URL;
   };
 
+
+const GOOGLE_AUTH_URL = 'http://3.39.101.251:8080/oauth2/authorization/google';
+
+const googleLoginHandler = () => {
+  window.location.href = GOOGLE_AUTH_URL;
+};
+
   return (
     <>
       <Head>
@@ -34,7 +41,7 @@ const Login: React.FC = () => {
             <div style={styles.title}><Title /></div>
             <p style={styles.subtitle}>여수 자전거 여행의 더 많은 정보<br/> 확인하세요!</p>
             <div style={styles.buttonContainer}>
-                <button style={styles.googleButton}><Google style={styles.icon} />Google로 시작하기</button>
+                <button onClick={googleLoginHandler} style={styles.googleButton}><Google style={styles.icon} />Google로 시작하기</button>
                 <button onClick={loginHandler} style={styles.kakaoButton}><Kakao style={styles.icon} />카카오톡으로 시작하기</button>
                 <button onClick={nextPage} style={styles.emailButton}><Email style={styles.icon2} />이메일로 시작하기</button>
             </div>
