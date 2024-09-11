@@ -4,3 +4,8 @@ export interface SignUpState {
     nickname: string | undefined;
     agree: Boolean | undefined;
 }
+
+export interface UpdatePasswordState {
+    email: string | undefined;
+    password: string | undefined;
+}

@@ -16,14 +16,14 @@ const Login: React.FC = () => {
   }
 
   // 백엔드의 카카오 OAuth2 인증 경로로 로그인 요청
-  const KAKAO_AUTH_URL = 'http://3.39.101.251:8080/oauth2/authorization/kakao';
+  const KAKAO_AUTH_URL = '${process.env.NEXT_PUBLIC_BASE_URL}oauth2/authorization/kakao';
 
   const loginHandler = () => {
     window.location.href = KAKAO_AUTH_URL;
   };
 
 
-const GOOGLE_AUTH_URL = 'http://3.39.101.251:8080/oauth2/authorization/google';
+const GOOGLE_AUTH_URL = '${process.env.NEXT_PUBLIC_BASE_URL}oauth2/authorization/google';
 
 const googleLoginHandler = () => {
   window.location.href = GOOGLE_AUTH_URL;
