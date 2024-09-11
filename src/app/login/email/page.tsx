@@ -45,6 +45,10 @@ const Email: React.FC = () => {
     router.push(`/login/email/signup`);
   };
 
+  const updatePasswordPage = () => {
+    router.push(`/login/updatePassword`);
+  };
+
   return (
     <>
       <Head>
@@ -86,7 +90,7 @@ const Email: React.FC = () => {
               </button>
               <span style={styles.checkText}>로그인 유지</span>
             </label>
-            <p style={styles.findPassword}>비밀번호 찾기</p>
+            <p onClick={updatePasswordPage} style={styles.findPassword}>비밀번호 찾기</p>
           </div>
           <button style={styles.loginButton} onClick={handleLogin}>
             로그인
