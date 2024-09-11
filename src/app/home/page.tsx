@@ -22,7 +22,7 @@ const Complete: React.FC = () => {
         <div style={{width:'320px',margin:'0 auto'}}>
             <div style={styles.headerBox}>
             </div>
-            <p style={styles.welcomeText}>반가워요 회원님!<br/>여수로 자전거 여행을 즐기러 <br/>가볼까요? </p>
+            <p style={styles.welcomeText}>여수로 <br/>메인화면 입니다. </p>
             <div style={{ marginBottom: '245px' }}></div> 
             <button onClick={nextPage} style={styles.nextButton}>다음</button>
         </div>

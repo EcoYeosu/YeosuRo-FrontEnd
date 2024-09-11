@@ -24,7 +24,7 @@ const NicknameCheckPage: React.FC = () => {
     if (nickname.length >= 2) {
       setSignUpState((prevState) => ({
         ...prevState,
-        nickname: nickname,
+        nickname,
       }));
 
       try {
@@ -36,7 +36,7 @@ const NicknameCheckPage: React.FC = () => {
           body: JSON.stringify({
             email: currentSignUpState.email,
             password: currentSignUpState.password,
-            nickname: nickname,
+            nickname: currentSignUpState.nickname,
             agree: currentSignUpState.agree,
           }),
         });
