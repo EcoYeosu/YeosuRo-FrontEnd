@@ -5,6 +5,7 @@ export interface SignUpState {
     agree: Boolean | undefined;
 }
 
+
 export interface Site {
     id: number;
     category: string;
@@ -25,4 +26,8 @@ export interface Plan {
     startDate: string;
     endDate: string;
     siteList: Site[];
+}
+export interface UpdatePasswordState {
+    email: string | undefined;
+    password: string | undefined;
 }

@@ -1,18 +1,53 @@
 'use client'
 
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Title from '@/features/login/images/title_blue.svg';
 import Cancell from '@/features/login/images/CancelIcon.svg';
 import Checkbox from '@/features/login/images/checkbox.svg';
 import { useRouter } from "next/navigation";
+import axios from 'axios';
 
 const Email: React.FC = () => {
-
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [keepLoggedIn, setKeepLoggedIn] = useState(false);
   const router = useRouter();
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://3.39.101.251:8080/login', {
+        email,
+        password,
+      });
+
+      const accessToken = response.headers['authorization'];
+      const refreshToken = response.headers['authorization-refresh'];
+
+      if (keepLoggedIn) {
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+      } else {
+        sessionStorage.setItem('accessToken', accessToken);
+        sessionStorage.setItem('refreshToken', refreshToken);
+      }
+
+      // 로그인 성공 후 페이지 이동
+      router.push(`/home`);
+      
+    } catch (error) {
+      console.error('로그인 실패:', error);
+      alert('로그인에 실패했습니다.');
+    }
+  };
+
   const nextPage = () => {
-      router.push(`/login/email/signup`);
-  }
+    router.push(`/login/email/signup`);
+  };
+
+  const updatePasswordPage = () => {
+    router.push(`/login/updatePassword`);
+  };
 
   return (
     <>
@@ -22,25 +57,48 @@ const Email: React.FC = () => {
       </Head>
       <div style={styles.container}>
         <div style={{width:'320px',margin:'0 auto'}}>
-            <div style={{textAlign:'center',position:'relative'}}>
-              <button style={styles.closeButton}><Cancell /></button>
-              <p style={styles.subtitle}>이메일로 시작하기</p>
-            </div>
-            <div style={styles.title}><Title /></div>
-            <input style={styles.textInput} type="email" placeholder="이메일"/>
-            <input style={styles.textInput} type="password" placeholder="비밀번호"/>
-            <div style={styles.optionsContainer}>
-              <label style={styles.checkboxLabel}>
-                <button><Checkbox /></button>
-                <span style={styles.checkText}>로그인 유지</span>
-              </label>
-              <p style={styles.findPassword}>비밀번호 찾기</p>
-            </div>
-            <button style={styles.loginButton}>로그인</button>
-            <div style={styles.signupContainer}>
-              <p style={styles.signupText}>아직 회원이 아니시라면?</p>
-              <p onClick={nextPage} style={styles.signupLink}>회원가입</p>
-            </div>
+          <div style={{textAlign:'center',position:'relative'}}>
+            <button style={styles.closeButton}><Cancell /></button>
+            <p style={styles.subtitle}>이메일로 시작하기</p>
+          </div>
+          <div style={styles.title}><Title /></div>
+          <input 
+            style={styles.textInput} 
+            type="email" 
+            placeholder="이메일" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input 
+            style={styles.textInput} 
+            type="password" 
+            placeholder="비밀번호" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <div style={styles.optionsContainer}>
+            <label style={styles.checkboxLabel}>
+              <button 
+                onClick={() => setKeepLoggedIn(!keepLoggedIn)}
+                style={styles.checkboxButton}
+              >
+                <Checkbox 
+                  style={{
+                    fill: keepLoggedIn ? '#0D77E0' : '#d1d1d1', // 상태에 따른 색상 변경
+                  }}
+                />
+              </button>
+              <span style={styles.checkText}>로그인 유지</span>
+            </label>
+            <p onClick={updatePasswordPage} style={styles.findPassword}>비밀번호 찾기</p>
+          </div>
+          <button style={styles.loginButton} onClick={handleLogin}>
+            로그인
+          </button>
+          <div style={styles.signupContainer}>
+            <p style={styles.signupText}>아직 회원이 아니시라면?</p>
+            <p onClick={nextPage} style={styles.signupLink}>회원가입</p>
+          </div>
         </div>
       </div>
     </>
@@ -129,6 +187,15 @@ const styles = {
     fontSize: '14px',
     color: '#000000',
     cursor: 'pointer',
+  },
+  checkboxButton: {
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    padding: '0',
+    borderRadius: '4px', // 버튼에 둥근 모서리 추가 (옵션)
+    width: '24px', // 버튼 크기 조정
+    height: '24px',
   },
 };
 

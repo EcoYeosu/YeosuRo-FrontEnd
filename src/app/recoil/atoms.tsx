@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 import { recoilPersist } from "recoil-persist";
-import { SignUpState, Site } from './type';
+import { SignUpState, UpdatePasswordState, Site } from './type';
 
 
 const { persistAtom } = recoilPersist({
@@ -28,3 +28,11 @@ export const editPageData = atom<Site[]>({
     key: 'editPageData',
     default: [],
 });
+export const updatePasswordState = atom<UpdatePasswordState>({
+    key: 'updatePasswordState',
+    default: {
+      email: undefined,
+      password: undefined,
+    },
+    effects_UNSTABLE: [persistAtom],
+})

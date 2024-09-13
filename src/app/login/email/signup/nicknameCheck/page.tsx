@@ -24,11 +24,11 @@ const NicknameCheckPage: React.FC = () => {
     if (nickname.length >= 2) {
       setSignUpState((prevState) => ({
         ...prevState,
-        nickname: nickname,
+        nickname,
       }));
 
       try {
-        const response = await fetch('http://3.39.101.251:8080/sign-up', {
+        const response = await fetch('${process.env.NEXT_PUBLIC_BASE_URL}sign-up', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const NicknameCheckPage: React.FC = () => {
           body: JSON.stringify({
             email: currentSignUpState.email,
             password: currentSignUpState.password,
-            nickname: nickname,
+            nickname: currentSignUpState.nickname,
             agree: currentSignUpState.agree,
           }),
         });
