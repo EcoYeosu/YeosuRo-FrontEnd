@@ -4,10 +4,12 @@ import { useQuery } from "@tanstack/react-query"
 export const useGetPlanList = () => {
   return useQuery({
     queryKey: ['plans'],
-    queryFn: () => api.get(`/v1/plans`, {
+    queryFn: () => { 
+      const response = api.get(`/v1/plans`, {
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyNDk0MTM4NywiZW1haWwiOiJ0ZXN0QG5hdmVyLmNvbSJ9.orvswzhmXQmMg67qGJ-OAP5Gm1eVswGKXUMhu8mSCYUnka-WWLpPG7aotRn9qTF8iY8kHJIZqmXTrXvzrH78Lg`
+        Authorization: `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyODIyMzc3OSwiZW1haWwiOiJ0ZXN0QG5hdmVyLmNvbSJ9.ATc0NBRK5gkhxbhbJunkTzf0KASUZRIJ5mXZk0JmsmGkQ1UZC7PU3O56HraVewm-kS-BvrPErWdSIQWR9mN2Xw`
       }
-    })
-  })
+    });
+    return response
+  }})
 }

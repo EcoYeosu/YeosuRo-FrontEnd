@@ -5,6 +5,7 @@ type ButtonProps = {
   onClick?: () => void;
   size?: "small" | "medium" | "large";
   className?: string;
+  color?:string
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -12,6 +13,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   size = "medium",
   className,
+  color
 }) => {
   let sizeClass = "";
 
@@ -31,7 +33,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       onClick={onClick}
       className={`bg-blue-500 text-white
-       font-semibold active:bg-blue-900 ${sizeClass} ${className}`}
+       font-semibold active:bg-blue-900 text-[#${color ? color : '#000000'}] ${sizeClass} ${className}`}
        style={{ borderRadius:'4px' }}>
       {value}
     </button>

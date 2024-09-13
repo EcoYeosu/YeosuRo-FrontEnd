@@ -2,16 +2,20 @@
 
 import Button from "@/components/common/buttons/Button";
 import TitleHeader from "@/features/plan/components/headers/TitleHeader";
-import { useRouter } from "next/navigation";
 import KakaoMap from "@/components/kakao/KakaoMap";
 import Toggle from "@/features/plan/components/toggle/toggle"
+import BottomSheet from "@/components/common/bottomSheet/Bottomsheet";
+import { useRecoilValue } from 'recoil';
+import { editPageData } from '@/app/recoil/atoms';
+import { useEffect } from "react";
 
-const PlanTypeFree= () => {
-    
-    const router = useRouter();
-    const nextPage = () => {
-        router.push(`/plan/add/type/free`);
-    }
+
+const PlanEdit= () => {
+    const siteList = useRecoilValue(editPageData);
+
+    useEffect(() => {
+        console.log(siteList);
+    }, []);
     
     return (
         <div style={{ width: '360px', margin:'0 auto' }}>
@@ -35,11 +39,11 @@ const PlanTypeFree= () => {
                     <div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-17px] w-0 h-0 border-l-[4.5px] border-l-transparent border-r-[4.5px] border-r-transparent border-t-[17px] border-t-blue-100 ">
                     </div>
                 </div>
-                <Button value={'일정 추가하기'} className={'w-full mb-3'} onClick={nextPage}/>
-                <Button value={'다음날 추가하기'} className={'w-full bg-white text-[#0D74DB] border border-[#C8C8C8] border-[1px]'}/>
+                <Button value={'일정 추가하기'} className={'w-full mb-3'}/>
+                <BottomSheet />
             </div>
         </div>
     )
 }; 
 
-export default PlanTypeFree;
+export default PlanEdit;
