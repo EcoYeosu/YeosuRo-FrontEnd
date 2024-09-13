@@ -11,7 +11,7 @@ function HttpClient(config?: AxiosRequestConfig) {
   
   const getResult = (response: AxiosResponse) => response.data;
   const client: AxiosInstance = axios.create(config);
-  const token = '';
+  const token = localStorage.getItem('access_token');
 
   const onRequestFulfilled = (config: InternalAxiosRequestConfig) => {
     if (token) {

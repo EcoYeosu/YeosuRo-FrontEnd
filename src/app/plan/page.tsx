@@ -65,9 +65,10 @@ const Plan = () => {
                     endDate={item.endDate} 
                     key={item.userId}
                     editPage={()=>editPage(item.siteList)}
+                    siteList={item.siteList}
                     />
                 )}
-                <AddPlanCard onClick={addPage}/>
+                <AddPlanCard onClick={addPage} />
             </div>
         </div>
     )

@@ -35,7 +35,7 @@ const BottomSheet = () => {
 
     return (
         <>
-            <Button value={'검색'} color={'0D74DB'} className={'w-full bg-white border border-[#C8C8C8] border-[1px]' } onClick={openSheet}/>
+            <Button value={'다음날 추가하기'} color={'0D74DB'} className={'w-full bg-white border border-[#C8C8C8] border-[1px]' } onClick={openSheet}/>
             <animated.div
                 style={{
                     transform: y.to(y => `translateY(${y}px)`),
