@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import Head from 'next/head';
-import Title from '@/features/login/images/title_blue.svg';
-import Cancell from '@/features/login/images/CancelIcon.svg';
-import Checkbox from '@/features/login/images/checkbox.svg';
+import Title from '@/components/login/images/title_blue.svg';
+import Cancell from '@/components/login/images/CancelIcon.svg';
+import Checkbox from '@/components/login/images/checkbox.svg';
 import { useRouter } from "next/navigation";
 import axios from 'axios';
 

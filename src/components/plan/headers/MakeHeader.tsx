@@ -1,4 +1,4 @@
-import CancelIcon from '@/features/plan/images/CancelIcon.svg'
+import CancelIcon from '@/components/plan/images/CancelIcon.svg'
 
 type ListHeaderProps = {
     title:string;

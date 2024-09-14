@@ -1,9 +1,9 @@
 'use client'
 
-import MakeHeader from '@/features/plan/components/headers/MakeHeader'
+import MakeHeader from '@/components/plan/headers/MakeHeader'
 import Button from '@/components/common/buttons/Button'
 import '@/styles/calendar.css';
-import Calendar from '@/features/plan/components/calendar/Calendar'
+import Calendar from '@/components/plan/calendar/Calendar'
 import { useRouter } from "next/navigation";
 
 const PlanSelectDay = () => {

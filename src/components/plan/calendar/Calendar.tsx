@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import '@/styles/calendar.css';
-import BackArrow from '../../images/CalendarArrow1.svg'
-import NextArrow from '../../images/CalendarArrow2.svg'
+import BackArrow from '@/components/plan/images/CalendarArrow1.svg'
+import NextArrow from '@/components/plan/images/CalendarArrow2.svg'
 
 type ValuePiece = Date | null;
 

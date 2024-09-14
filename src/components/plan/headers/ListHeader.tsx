@@ -1,5 +1,5 @@
-import BackIcon from '@/features/plan/images/BackIcon.svg'
-import CancelIcon from '@/features/plan/images/CancelIcon.svg'
+import BackIcon from '@/components/plan/images/BackIcon.svg'
+import CancelIcon from '@/components/plan/images/CancelIcon.svg'
 
 const ListHeader = () => {
     return (

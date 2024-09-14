@@ -1,4 +1,4 @@
-import BackIcon from '@/features/plan/images/BackIcon.svg'
+import BackIcon from '@/components/plan/images/BackIcon.svg'
 
 type TitleHeaderProps = {
     title:string;

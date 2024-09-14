@@ -2,10 +2,10 @@
 
 import React from 'react';
 import Head from 'next/head';
-import Title from '@/features/login/images/title_white.svg';
-import Google from '@/features/login/images/google.svg';
-import Kakao from '@/features/login/images/kakao.svg';
-import Email from '@/features/login/images/email.svg';
+import Title from '@/components/login/images/title_white.svg';
+import Google from '@/components/login/images/google.svg';
+import Kakao from '@/components/login/images/kakao.svg';
+import Email from '@/components/login/images/email.svg';
 import { useRouter } from "next/navigation";
 
 const Login: React.FC = () => {

@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ReactQueryProviders from "./provider";
 import Script from 'next/script';
-import RecoilRootWrapper from '@/app/recoil/RecoilWrapper'
+import RecoilRootWrapper from '@/recoil/RecoilWrapper'
 
 const inter = Inter({ subsets: ["latin"] });
 

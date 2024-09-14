@@ -1,6 +1,8 @@
 import { api } from "@/apis"
 import { useQuery } from "@tanstack/react-query"
 
+
+// 여정 리스트 조회
 export const useGetPlanList = () => {
   return useQuery({
     queryKey: ['plans'],

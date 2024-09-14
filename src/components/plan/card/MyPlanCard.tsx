@@ -1,9 +1,4 @@
-type CardProps = {
-    title? : string,
-    startDate? : string,
-    endDate? : string,
-    editPage?: () => void;
-}
+import { CardProps } from '@/type/plan'
 
 const MyPlanCard: React.FunctionComponent<CardProps> = ({title,startDate,endDate,editPage}) => {
     return (

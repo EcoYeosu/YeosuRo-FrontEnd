@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import Head from 'next/head';
-import CheckboxIcon from '@/features/login/images/checkbox.svg';
-import BackIcon from '@/features/login/images/backIcon.svg';
-import NextIcon from '@/features/login/images/nextIcon.svg';
+import CheckboxIcon from '@/components/login/images/checkbox.svg';
+import BackIcon from '@/components/login/images/backIcon.svg';
+import NextIcon from '@/components/login/images/nextIcon.svg';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
