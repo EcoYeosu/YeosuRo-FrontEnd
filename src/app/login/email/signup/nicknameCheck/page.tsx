@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import Head from 'next/head';
-import BackIcon from '@/features/login/images/backIcon.svg';
-import CancelIcon from '@/features/login/images/CancelIcon.svg';
+import BackIcon from '@/components/login/images/backIcon.svg';
+import CancelIcon from '@/components/login/images/CancelIcon.svg';
 import { useRouter } from 'next/navigation';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { signUpState } from '@/app/recoil/atoms';
+import { signUpState } from '@/recoil/atoms';
 
 const NicknameCheckPage: React.FC = () => {
   const [nickname, setNicknameState] = useState('');

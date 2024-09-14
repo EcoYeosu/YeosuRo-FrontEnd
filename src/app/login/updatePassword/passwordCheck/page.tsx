@@ -2,14 +2,14 @@
 
 import React, { useState } from 'react';
 import Head from 'next/head';
-import BackIcon from '@/features/login/images/backIcon.svg';
-import CancelIcon from '@/features/login/images/CancelIcon.svg';
-import CheckIcon from '@/features/login/images/checkIcon.svg';
-import BlindIcon from '@/features/login/images/blindIcon.svg';
-import VisibleIcon from '@/features/login/images/visibleIcon.svg';
+import BackIcon from '@/components/login/images/backIcon.svg';
+import CancelIcon from '@/components/login/images/CancelIcon.svg';
+import CheckIcon from '@/components/login/images/checkIcon.svg';
+import BlindIcon from '@/components/login/images/blindIcon.svg';
+import VisibleIcon from '@/components/login/images/visibleIcon.svg';
 import { useRouter } from "next/navigation";
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { updatePasswordState } from '@/app/recoil/atoms';
+import { updatePasswordState } from '@/recoil/atoms';
 
 const PasswordCheckPage: React.FC = () => {
   const [password, setPassword] = useState('');

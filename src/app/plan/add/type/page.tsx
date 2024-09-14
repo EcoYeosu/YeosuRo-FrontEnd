@@ -1,6 +1,6 @@
 'use client'
 
-import MakeHeader from '@/features/plan/components/headers/MakeHeader'
+import MakeHeader from '@/components/plan/headers/MakeHeader'
 import Button from '@/components/common/buttons/Button'
 import { useRouter } from "next/navigation";
 

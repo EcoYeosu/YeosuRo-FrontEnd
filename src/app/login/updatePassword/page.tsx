@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import BackIcon from '@/features/login/images/backIcon.svg';
-import CancelIcon from '@/features/login/images/CancelIcon.svg';
+import BackIcon from '@/components/login/images/backIcon.svg';
+import CancelIcon from '@/components/login/images/CancelIcon.svg';
 import { useRouter } from "next/navigation";
 import { useSetRecoilState } from 'recoil';
-import { updatePasswordState } from '@/app/recoil/atoms';
+import { updatePasswordState } from '@/recoil/atoms';
 
 const EmailCheck: React.FC = () => {
     const [email, setEmail] = useState<string>('');

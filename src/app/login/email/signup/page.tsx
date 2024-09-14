@@ -2,12 +2,12 @@
 
 import React, { useState } from 'react';
 import Head from 'next/head';
-import CheckboxIcon from '@/features/login/images/checkbox.svg'; // 단일 체크박스 SVG
-import BackIcon from '@/features/login/images/backIcon.svg';
-import NextIcon from '@/features/login/images/nextIcon.svg';
+import CheckboxIcon from '@/components/login/images/checkbox.svg'; // 단일 체크박스 SVG
+import BackIcon from '@/components/login/images/backIcon.svg';
+import NextIcon from '@/components/login/images/nextIcon.svg';
 import { useRouter } from 'next/navigation';
 import { useRecoilState } from 'recoil';
-import { signUpState } from '@/app/recoil/atoms';
+import { signUpState } from '@/recoil/atoms';
 
 const SignUp: React.FC = () => {
   const router = useRouter();

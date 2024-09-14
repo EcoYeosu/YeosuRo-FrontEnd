@@ -1,10 +1,10 @@
 'use client'
 
 import Button from "@/components/common/buttons/Button";
-import TitleHeader from "@/features/plan/components/headers/TitleHeader";
+import TitleHeader from "@/components/plan/headers/TitleHeader";
 import { useRouter } from "next/navigation";
-import KakaoMap from "@/components/kakao/KakaoMap";
-import Toggle from "@/features/plan/components/toggle/toggle"
+import KakaoMap from "@/components/common/kakao/KakaoMap";
+import Toggle from "@/components/plan/toggle/toggle"
 import BottomSheet from "@/components/common/bottomSheet/Bottomsheet";
 
 

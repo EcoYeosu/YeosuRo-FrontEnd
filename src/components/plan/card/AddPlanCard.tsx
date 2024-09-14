@@ -1,4 +1,4 @@
-import AddIcon from '@/features/plan/images/AddIcon.svg'
+import AddIcon from '@/components/plan/images/AddIcon.svg'
 
 type NextPage = {
     onClick?: () => void;
