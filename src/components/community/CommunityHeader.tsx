@@ -8,28 +8,29 @@ import SearchIcon from '@/components/community/images/searchIcon.svg'; // 검색
 
 interface CommunityHeaderProps {
     onCategoryChange: (category: string) => void;
+    onEditClick: () => void; // 추가된 prop
 }
 
-function CommunityHeader({ onCategoryChange }: CommunityHeaderProps) {
+function CommunityHeader({ onCategoryChange, onEditClick }: CommunityHeaderProps) {
     return (
         <header className={styles.header}>
             <div className={styles.topSection}>
                 <h1 className={styles.title}>커뮤니티</h1>
                 <div className={styles.icons}>
-                    <EditIcon className={styles.icon} />
+                    <EditIcon className={styles.icon} onClick={onEditClick} /> {/* 클릭 시 onEditClick 호출 */}
                     <SearchIcon className={styles.icon} />
                 </div>
             </div>
 
             <div className={styles.navBar}>
                 <button className={`${styles.categoryButton}`} onClick={() => onCategoryChange('TRAVEL')}>인기글</button>
-                <button className={styles.categoryButton} onClick={() => onCategoryChange('FREE')}>자유톡 👋</button>
+                <button className={styles.categoryButton} onClick={() => onCategoryChange('FREE_TALK')}>자유톡 👋</button>
                 <button className={styles.categoryButton} onClick={() => onCategoryChange('PICK')}>숨은명소PICK 🌿</button>
-                <button className={styles.categoryButton} onClick={() => onCategoryChange('HARBOR')}>여수항 🚢</button>
+                <button className={styles.categoryButton} onClick={() => onCategoryChange('HARBOR')}>여수랑 🚲</button>
+                <button className={styles.categoryButton} onClick={() => onCategoryChange('EVENT')}>이벤트 🎁</button>
             </div>
         </header>
     );
 }
 
 export default CommunityHeader;
-

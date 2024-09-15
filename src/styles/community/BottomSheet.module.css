@@ -1,0 +1,21 @@
+.bottomSheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    display: flex; /* 중앙 정렬을 위해 flex 사용 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
+
+.sheetContent {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+   
+}
