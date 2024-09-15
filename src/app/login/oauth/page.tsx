@@ -27,7 +27,7 @@ const SignUp: React.FC = () => {
   const nextPage = async () => {
     if (agreePrivacy && agreeTerms) {
       try {
-        const response = await axios.patch('${process.env.NEXT_PUBLIC_BASE_URL}login/oauth', agreeMarketing, {
+        const response = await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}login/oauth`, agreeMarketing, {
           headers: {
             'Content-Type': 'application/json'
           },

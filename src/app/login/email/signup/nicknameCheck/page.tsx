@@ -28,7 +28,7 @@ const NicknameCheckPage: React.FC = () => {
       }));
 
       try {
-        const response = await fetch('${process.env.NEXT_PUBLIC_BASE_URL}sign-up', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}sign-up`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -47,7 +47,7 @@ const PasswordCheckPage: React.FC = () => {
       }));
 
       try {
-        const response = await fetch('${process.env.NEXT_PUBLIC_BASE_URL}sign-up/password', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}sign-up/password`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
