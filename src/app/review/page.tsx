@@ -9,7 +9,7 @@ const reviewPage = () => {
       </div>
       <section>
         <h2 className="">
-          후기를 작성할 여정을
+          후기를 작성할 여정
           <br />
           골라주세요
         </h2>
