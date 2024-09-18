@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 import { recoilPersist } from "recoil-persist";
-import { SignUpState, UpdatePasswordState, Site } from './type';
+import { SignUpState, UpdatePasswordState, Site, PostFeedState } from './type';
 
 
 const { persistAtom } = recoilPersist({
@@ -35,4 +35,13 @@ export const updatePasswordState = atom<UpdatePasswordState>({
       password: undefined,
     },
     effects_UNSTABLE: [persistAtom],
-})
+});
+
+export const postFeedState = atom<PostFeedState>({
+    key: 'postFeedState',
+    default:{
+        feedCategory: undefined,
+        imageUrls: [],
+    },
+    effects_UNSTABLE: [persistAtom],
+});

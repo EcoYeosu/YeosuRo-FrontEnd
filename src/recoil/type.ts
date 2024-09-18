@@ -2,7 +2,7 @@ export interface SignUpState {
     email: string | undefined;
     password: string | undefined;
     nickname: string | undefined;
-    agree: Boolean | undefined;
+    agree: boolean | undefined;
 }
 
 
@@ -30,4 +30,9 @@ export interface Plan {
 export interface UpdatePasswordState {
     email: string | undefined;
     password: string | undefined;
+}
+
+export interface PostFeedState {
+    feedCategory: string | undefined;
+    imageUrls: string[]; 
 }

@@ -16,7 +16,7 @@ const Email: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://3.39.101.251:8080/login', {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}login`, {
         email,
         password,
       });
