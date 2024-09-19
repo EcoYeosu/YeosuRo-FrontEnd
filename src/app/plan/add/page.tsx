@@ -10,7 +10,7 @@ const PlanSelectDay = () => {
 
     const router = useRouter();
     const nextPage = () => {
-        router.push(`/plan/add/type`);
+        router.push(`/plan/add/free`);
     }
 
     return (

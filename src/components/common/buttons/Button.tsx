@@ -33,8 +33,8 @@ const Button: React.FC<ButtonProps> = ({
     <button
       onClick={onClick}
       className={`bg-blue-500 text-white
-       font-semibold active:bg-blue-900 text-[#${color ? color : '#000000'}] ${sizeClass} ${className}`}
-       style={{ borderRadius:'4px' }}>
+       font-semibold active:bg-blue-900] ${sizeClass} ${className}`}
+       style={{ borderRadius:'4px', color:`#${color ? color : 'ffffff'}`}}>
       {value}
     </button>
   );
