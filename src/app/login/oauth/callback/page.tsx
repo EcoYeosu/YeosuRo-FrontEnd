@@ -10,7 +10,7 @@ const OAuthCallback: React.FC = () => {
   useEffect(() => {
     const fetchTokens = async () => {
       try {
-        const response = await axios.get('${process.env.NEXT_PUBLIC_BASE_URL}login/oauth/callback', {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}login/oauth/callback`, {
           withCredentials: true,
         });
 

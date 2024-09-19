@@ -1,7 +1,7 @@
 import { atom } from 'recoil'
 import { recoilPersist } from "recoil-persist";
-import { SignUpState, UpdatePasswordState } from './type';
 import { PlanData,Site } from '@/type/plan'
+import { SignUpState, UpdatePasswordState, Site, PostFeedState } from './type';
 
 
 const { persistAtom } = recoilPersist({
@@ -25,20 +25,6 @@ export const signUpState = atom<SignUpState>({
     effects_UNSTABLE: [persistAtom],
 });
 
-export const planData = atom<PlanData>({
-    key: 'planData',
-    default:{
-        userId: 0,
-        title: '',
-        content: '',
-        createAt: '',
-        startDate: '',
-        endDate: '',
-        siteList:[],
-        planId:0,
-    },
-    effects_UNSTABLE: [persistAtom],
-});
 export const updatePasswordState = atom<UpdatePasswordState>({
     key: 'updatePasswordState',
     default: {
@@ -66,6 +52,28 @@ export const siteData = atom<Site>({
         visitDate: '',
         startTime: '',
         endTime: '',
+});
+  
+export const planData = atom<PlanData>({
+    key: 'planData',
+    default:{
+        userId: 0,
+        title: '',
+        content: '',
+        createAt: '',
+        startDate: '',
+        endDate: '',
+        siteList:[],
+        planId:0,
+    },
+    effects_UNSTABLE: [persistAtom],
+});
+
+export const postFeedState = atom<PostFeedState>({
+    key: 'postFeedState',
+    default:{
+        feedCategory: undefined,
+        imageUrls: [],
     },
     effects_UNSTABLE: [persistAtom],
 });

@@ -1,0 +1,54 @@
+.postItem {
+    padding: 16px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.category {
+    font-size: 14px;
+    color: #aaa;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.authorInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.profileImage {
+    border-radius: 50%;
+}
+
+.images {
+    display: flex;
+    gap: 8px;
+    overflow-x: scroll;
+}
+
+.postImage {
+    border-radius: 8px;
+}
+
+.content {
+    margin: 16px 0;
+    font-size: 16px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+}

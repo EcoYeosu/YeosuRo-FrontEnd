@@ -1,11 +1,16 @@
-'use client'
+'use client';
 
 import { useEffect, useState } from "react";
 import HttpClient from "@/apis/httpClient";
-import { useRouter } from "next/navigation"; // useRouter 훅 사용
+import { useRouter } from "next/navigation"; // Next.js 13 이상에서 App Router 사용 시
+
+interface Journey {
+    id: string;
+    name: string;
+}
 
 const ReviewPage = () => {
-    const [journeys, setJourneys] = useState<string[]>([]); // 여정 데이터를 저장할 상태
+    const [journeys, setJourneys] = useState<Journey[]>([]); // 여정 데이터를 저장할 상태
     const [loading, setLoading] = useState(true); // 로딩 상태 관리
     const [error, setError] = useState<string | null>(null); // 에러 상태 관리
     const router = useRouter(); // useRouter 훅 생성
@@ -19,7 +24,7 @@ const ReviewPage = () => {
         // API 요청
         const fetchJourneys = async () => {
             try {
-                const data = await httpClient.get("/journey"); // 여정 데이터 요청
+                const data = await httpClient.get<Journey[]>("/journeys"); // 여정 데이터 요청
                 setJourneys(data); // 요청 성공 시 여정 데이터를 상태에 저장
             } catch (err) {
                 setError("여정을 불러오는데 실패했습니다."); // 에러 발생 시 에러 메시지 설정
@@ -41,28 +46,22 @@ const ReviewPage = () => {
         <div className="w-360 mx-auto border border-1 border-black">
             <div className="relative flex justify-start items-center h-11">
                 <div className="absolute left-2">X</div>
-                <div className="mx-auto">여정 후기 작성하기</div>
+                <div className="mx-auto">여정 후기 작성 페이지</div>
             </div>
             <section>
-                <h2 className="">
-                    후기를 작성할 여정
-                    <br />
-                    골라주세요
-                </h2>
-
                 <div>
                     {loading ? (
                         <div>로딩 중...</div>
                     ) : error ? (
                         <div>{error}</div>
                     ) : journeys.length > 0 ? (
-                        journeys.map((journey, index) => (
+                        journeys.map((journey) => (
                             <button
-                                key={index}
-                                onClick={() => handleButtonClick(journey)}
+                                key={journey.id}
+                                onClick={() => handleButtonClick(journey.id)}
                                 className="my-2 border border-gray-300 p-2 w-full text-left"
                             >
-                                {journey}
+                                {journey.name}
                             </button>
                         ))
                     ) : (

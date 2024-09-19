@@ -1,0 +1,129 @@
+/* 게시글 작성 페이지 전체 컨테이너 */
+.createFeedContainer {
+    padding: 16px;
+    background-color: white; /* 배경색 흰색 */
+}
+
+/* 상단 바 스타일 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+/* 뒤로 가기 버튼 */
+.backButton {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    
+}
+
+/* 페이지 타이틀 */
+.pageTitle {
+    font-size: 16px;
+    font-weight: none;
+}
+
+/* 완료 버튼 */
+.submitButton {
+    background: none;
+    border: none;
+    color: blue;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* 카테고리 표시 */
+.category {
+    margin-bottom: 16px;
+    padding: 4px 8px;
+    background-color: #f5f5f5;
+    display: inline-block;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* 이미지 업로드 섹션 */
+.imageUploadSection {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+/* 이미지 업로드 버튼 */
+.imageUploadLabel {
+    cursor: pointer;
+    margin-right: 12px; /* 미리보기와 간격 조절 */
+}
+
+.imageUploadButton {
+    width: 80px;
+    height: 80px;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 8px;
+}
+
+/* 숨겨진 파일 입력 */
+.imageUploadInput {
+    display: none;
+}
+
+/* 이미지 미리보기 컨테이너 */
+.imagePreviewContainer {
+    display: flex;
+    gap: 8px; /* 이미지 간의 간격 */
+}
+
+/* 개별 이미지 미리보기 */
+.imagePreview {
+    position: relative;
+}
+
+/* 업로드된 이미지 스타일 */
+.uploadedImage {
+    border-radius: 8px;
+}
+
+/* 삭제 버튼 스타일 */
+.deleteButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: #f5f5f5;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 제목 입력 스타일 */
+.titleInput {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 16px;
+    outline: none;
+    resize: none;
+}
+
+/* 주의 문구 스타일 */
+.notice {
+    font-size: 12px;
+    color: #999;
+}
