@@ -1,7 +1,7 @@
 import { atom } from 'recoil'
 import { recoilPersist } from "recoil-persist";
 import { PlanData,Site } from '@/type/plan'
-import { SignUpState, UpdatePasswordState, Site, PostFeedState } from './type';
+import { SignUpState, UpdatePasswordState, PostFeedState } from './type';
 
 
 const { persistAtom } = recoilPersist({
@@ -52,6 +52,7 @@ export const siteData = atom<Site>({
         visitDate: '',
         startTime: '',
         endTime: '',
+    }
 });
   
 export const planData = atom<PlanData>({
