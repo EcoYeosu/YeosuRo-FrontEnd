@@ -6,8 +6,8 @@ import AddPlanCard from '@/components/plan/card/AddPlanCard'
 import { useGetPlanList } from '@/hooks/plan';
 import { useRouter } from "next/navigation";
 import { useSetRecoilState } from 'recoil';
-import { editPageData } from '@/recoil/atoms';
-import { SiteList, PlanData } from '@/type/plan';
+import { allPlanData, planData } from '@/recoil/atoms';
+import { PlanData } from '@/type/plan';
   
 const Plan = () => {
 
@@ -16,21 +16,23 @@ const Plan = () => {
         router.push(`/plan/add`);
     }
 
-    const setSiteList = useSetRecoilState(editPageData);
+    const setPlan = useSetRecoilState(planData);
+    const setAllPlanList = useSetRecoilState(allPlanData);
 
-    const saveList = (siteList:SiteList[]) => {
-      setSiteList(siteList);
+    const savePlanData = (planData:PlanData) => {
+      setPlan(planData);
     };
-    const editPage = (siteList:SiteList[]) => {
-      saveList(siteList)
+    const editPage = (planData: PlanData) => {
+      savePlanData(planData);
       router.push(`/plan/edit`);
-    }
+    };
 
     const { data, isLoading, error } = useGetPlanList();
 
     
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
+    setAllPlanList(data.data)
 
     return (
         <div style={{ width: '360px', margin:'0 auto'}}>
@@ -42,7 +44,7 @@ const Plan = () => {
                     startDate={item.startDate} 
                     endDate={item.endDate} 
                     key={item.userId}
-                    editPage={()=>editPage(item.siteList)}
+                    editPage={()=>editPage(item)}
                     siteList={item.siteList}
                     />
                 )}

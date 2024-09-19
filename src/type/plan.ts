@@ -1,4 +1,4 @@
-export interface SiteList {
+export interface Site {
     id: number;
     category: string;
     memo: string;
@@ -17,7 +17,8 @@ export interface PlanData {
     createAt: string;
     startDate: string;
     endDate: string;
-    siteList: SiteList[];
+    siteList: Site[];
+    planId:number;
 }
 
 export type CardProps = {
@@ -25,5 +26,5 @@ export type CardProps = {
     startDate? : string,
     endDate? : string,
     editPage?: () => void;
-    siteList?: SiteList[]
+    siteList?: Site[]
 }
