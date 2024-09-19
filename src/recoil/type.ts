@@ -1,3 +1,8 @@
+export interface LoginState {
+    isLogin: boolean | undefined;
+    userId: number | undefined;
+}
+
 export interface SignUpState {
     email: string | undefined;
     password: string | undefined;

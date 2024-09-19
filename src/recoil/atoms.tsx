@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 import { recoilPersist } from "recoil-persist";
-import { SignUpState, UpdatePasswordState, Site, PostFeedState } from './type';
+import { SignUpState, UpdatePasswordState, Site, PostFeedState, LoginState } from './type';
 
 
 const { persistAtom } = recoilPersist({
@@ -8,9 +8,13 @@ const { persistAtom } = recoilPersist({
     storage: typeof window !== 'undefined' ? sessionStorage : undefined,
 });
 
-export const isLoginState = atom<boolean>({
-    key: "isLogin",
-    default: false,
+export const isLoginState = atom<LoginState>({
+    key: 'isLoginState',
+    default: {
+        isLogin: false,
+        userId: undefined,
+    },
+    effects_UNSTABLE: [persistAtom],
 });
 
 export const signUpState = atom<SignUpState>({
