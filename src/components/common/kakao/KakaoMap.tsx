@@ -1,6 +1,19 @@
+'use client'
+
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { useEffect,useState } from 'react';
 
 const KakaoMap = () => {
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+      setIsClient(true);
+    }, []);
+  
+  if (!isClient) {
+      return <p>Loading...</p>;
+  }
 
   return (
     <div style={{ width: '100%', height: '200px' }}>
