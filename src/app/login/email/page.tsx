@@ -7,12 +7,16 @@ import Cancell from '@/components/login/images/CancelIcon.svg';
 import Checkbox from '@/components/login/images/checkbox.svg';
 import { useRouter } from "next/navigation";
 import axios from 'axios';
+import { useSetRecoilState } from 'recoil';
+import { isLoginState } from '@/recoil/atoms';
 
 const Email: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [keepLoggedIn, setKeepLoggedIn] = useState(false);
   const router = useRouter();
+  const setLoginState = useSetRecoilState(isLoginState);
+  
 
   const handleLogin = async () => {
     try {
@@ -23,14 +27,23 @@ const Email: React.FC = () => {
 
       const accessToken = response.headers['authorization'];
       const refreshToken = response.headers['authorization-refresh'];
+      const userId = response.data.userId;
+      console.log("아이디:", userId)
 
       if (keepLoggedIn) {
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
       } else {
-        sessionStorage.setItem('accessToken', accessToken);
-        sessionStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
       }
+
+      // 로그인 상태 및 사용자 ID 업데이트
+      setLoginState({
+        isLogin: true, // 로그인 상태 true로 설정
+        userId: userId, // 사용자 ID 설정
+      });
+
 
       // 로그인 성공 후 페이지 이동
       router.push(`/home`);

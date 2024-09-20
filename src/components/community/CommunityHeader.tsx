@@ -23,10 +23,10 @@ function CommunityHeader({ onCategoryChange, onEditClick }: CommunityHeaderProps
             </div>
 
             <div className={styles.navBar}>
-                <button className={`${styles.categoryButton}`} onClick={() => onCategoryChange('TRAVEL')}>인기글</button>
+                <button className={`${styles.categoryButton}`} onClick={() => onCategoryChange('POPULAR')}>인기글</button>
                 <button className={styles.categoryButton} onClick={() => onCategoryChange('FREE_TALK')}>자유톡 👋</button>
                 <button className={styles.categoryButton} onClick={() => onCategoryChange('PICK')}>숨은명소PICK 🌿</button>
-                <button className={styles.categoryButton} onClick={() => onCategoryChange('HARBOR')}>여수랑 🚲</button>
+                <button className={styles.categoryButton} onClick={() => onCategoryChange('QNA')}>여수랑QnA🚲</button>
                 <button className={styles.categoryButton} onClick={() => onCategoryChange('EVENT')}>이벤트 🎁</button>
             </div>
         </header>

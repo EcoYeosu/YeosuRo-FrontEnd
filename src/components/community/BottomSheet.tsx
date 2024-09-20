@@ -16,10 +16,10 @@ const BottomSheet: React.FC<BottomSheetProps> = ({ visible, onClose, onCategoryS
         <div className={styles.bottomSheet}>
             <div className={styles.sheetContent}>
                 <h1>어느 게시판에 글을 쓸까요?</h1>
-                <button onClick={() => onCategorySelect('TRAVEL')}>인기글</button>
+                <button onClick={() => onCategorySelect('POPULAR')}>인기글</button>
                 <button onClick={() => onCategorySelect('FREE_TALK')}>자유톡 👋</button>
                 <button onClick={() => onCategorySelect('PICK')}>숨은명소PICK 🌿</button>
-                <button onClick={() => onCategorySelect('HARBOR')}>여수랑 🚲</button>
+                <button onClick={() => onCategorySelect('QnA')}>여수랑 QnA 🚲</button>
                 <button onClick={() => onCategorySelect('EVENT')}>이벤트 🎁</button>
                 <button onClick={onClose}>닫기</button>
             </div>

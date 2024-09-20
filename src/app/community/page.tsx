@@ -8,17 +8,17 @@ import CommunityHeader from '@/components/community/CommunityHeader';
 import CommunityFeedList from '@/components/community/CommunityFeedList';
 import BottomSheet from '@/components/community/BottomSheet';
 import styles from '@/styles/community/CommunityPage.module.css';
-import { useGetCommunityPosts } from '@/hooks/community'; // 리액트 쿼리 훅 import
-import { Post } from '@/type/community'; // 타입 import
+import { useGetCommunityFeeds } from '@/hooks/community'; // 리액트 쿼리 훅 import
+import { Feed } from '@/type/community'; // 타입 import
 
 const CommunityPage = () => {
-    const [category, setCategory] = useState<string>('TRAVEL');
+    const [category, setCategory] = useState<string>('POPULAR');
     const [isSheetVisible, setSheetVisible] = useState<boolean>(false); // Bottom sheet visibility 상태
     const setSelectedCategory = useSetRecoilState(postFeedState); // Recoil 상태 설정 함수
     const router = useRouter();
 
     // React Query로 게시글 목록 가져오기
-    const { data: posts, isLoading, error } = useGetCommunityPosts(category);
+    const { data: posts, isLoading, error } = useGetCommunityFeeds(category);
 
     const handleCategoryChange = (newCategory: string) => {
         setCategory(newCategory);
@@ -47,7 +47,8 @@ const CommunityPage = () => {
     return (
         <div className={styles.communityPage}>
             <CommunityHeader onCategoryChange={handleCategoryChange} onEditClick={handleEditClick} />
-            <CommunityFeedList posts={posts as Post[]} />
+            <div className={styles.content}></div>
+            <CommunityFeedList feeds={posts as Feed[]} />
             <BottomSheet 
                 visible={isSheetVisible} 
                 onClose={() => setSheetVisible(false)} 

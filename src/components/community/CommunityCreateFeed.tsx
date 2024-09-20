@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useRecoilState } from 'recoil';
 import { postFeedState } from '@/recoil/atoms';
-import { useUploadImages, useCreatePost } from '@/hooks/community';
+import { useUploadImages, useCreateFeed } from '@/hooks/community';
 import styles from '@/styles/community/CommunityCreateFeed.module.css';
 
 const CommunityCreateFeed: React.FC = () => {
@@ -19,7 +19,7 @@ const CommunityCreateFeed: React.FC = () => {
   const router = useRouter();
 
   const { mutate: uploadImages } = useUploadImages();
-  const { mutate: createPost } = useCreatePost();
+  const { mutate: createFeed } = useCreateFeed();
 
       // useEffect를 사용하여 feedState의 변화를 추적
       useEffect(() => {
@@ -71,8 +71,8 @@ const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
       setError('제목과 내용을 모두 작성해주세요.');
       return;
     }
-
-    createPost(
+  
+    createFeed(
       {
         title,
         content,
@@ -84,13 +84,13 @@ const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
           router.push('/community');
         },
         onError: (error) => {
-          console.error('게시글 등록 실패:', error);
-          setError('게시글 등록에 오류가 발생했습니다.');
+          console.error('피드 등록 실패:', error);
+          setError('피드 등록에 오류가 발생했습니다.');
         },
       }
     );
   };
-
+  
   return (
     <div className={styles.createFeedContainer}>
       {/* 상단 바 */}

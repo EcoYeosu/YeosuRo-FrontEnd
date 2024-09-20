@@ -1,0 +1,174 @@
+.postDetailContainer {
+    padding: 16px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .pageTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .backButton {
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .authorInfo {
+    display: flex; /* Flexbox 사용 */
+    align-items: center; /* 수직 가운데 정렬 */
+    margin-bottom: 16px; /* 하단 여백 */
+}
+
+.authorDetails {
+    margin-left: 1px; /* 작성자 정보와 프로필 이미지 사이의 간격 */
+}
+
+/* 수정 및 삭제 버튼 스타일 */
+.actions {
+    display: flex;
+    gap: 8px; /* 버튼 사이의 간격 */
+}
+
+.editButton,
+.deleteButton {
+    background-color: transparent; /* 배경색 제거 */
+    border: none; /* 테두리 제거 */
+    color: #888; /* 텍스트 색상 */
+    cursor: pointer; /* 클릭 가능한 커서 */
+    font-size: 14px; /* 텍스트 크기 */
+    padding: 0; /* 여백 제거 */
+    margin-left: 16px; /* 작성자 정보와 버튼 사이의 간격 */
+}
+
+/* 버튼에 마우스 올릴 때 스타일 */
+.editButton:hover,
+.deleteButton:hover {
+    color: #000; /* 호버 시 텍스트 색상 변경 */
+}
+  
+  .nickname {
+    font-weight: bold;
+  }
+  
+  .tier, .createAt {
+    margin-left: 10px;
+    color: grey;
+  }
+  
+  .imageContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.likeContainer {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+  
+  .postImage {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+  
+  .content {
+    margin-top: 20px;
+    font-size: 1.2rem;
+  }
+  
+  .postStats {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.9rem;
+    color: grey;
+  }
+
+  .commentInputContainer {
+    display: flex; /* 입력창과 전송 버튼을 가로로 정렬 */
+    align-items: center; /* 입력창과 버튼을 세로로 가운데 정렬 */
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: white; /* 배경색 */
+}
+
+.commentInput {
+    flex: 1; /* 입력창을 남은 공간에 맞게 확장 */
+    padding: 8px;
+    border: none; /* 테두리 제거 */
+    border-radius: 8px;
+    outline: none; /* 포커스 시 테두리 제거 */
+    background-color: #f5f5f5; /* 입력창 배경색 */
+}
+
+.commentSubmitButton {
+    margin-left: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #007bff; /* 버튼 색상 */
+    color: #ffffff; /* 버튼 텍스트 색상 */
+    cursor: pointer;
+}
+
+.commentSubmitButton:hover {
+    background-color: #0056b3; /* 버튼 호버 시 색상 */
+}
+  
+  .repliesSection {
+    margin-top: 30px;
+    margin-left: 10px;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+  }
+  
+  .replyItem {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+  
+  .replyProfileImage {
+    border-radius: 50%;
+  }
+  
+  .replyContent {
+    margin-left: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+  }
+  
+  .replyAuthor {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .replyAuthor .nickname {
+    font-weight: bold;
+  }
+  
+  .replyAuthor .tier, .replyAuthor .createAt {
+    margin-left: 10px;
+    color: grey;
+  }
+
+  

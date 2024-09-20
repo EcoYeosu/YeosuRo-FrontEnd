@@ -3,9 +3,12 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { useSetRecoilState } from 'recoil';
+import { isLoginState } from '@/recoil/atoms';
 
 const OAuthCallback: React.FC = () => {
   const router = useRouter();
+  const setLoginState = useSetRecoilState(isLoginState); 
 
   useEffect(() => {
     const fetchTokens = async () => {
@@ -15,16 +18,24 @@ const OAuthCallback: React.FC = () => {
         });
 
         // 서버 응답에서 authorization 헤더로 토큰 받기
-        const accessToken = response.headers['authorization']; // 첫 글자 대문자 확인
-        const refreshToken = response.headers['authorization-refresh']; // 첫 글자 대문자 확인
+        const accessToken = response.headers['authorization']; 
+        const refreshToken = response.headers['authorization-refresh']; 
+        const userId = response.data.userId;
 
         // 토큰을 로컬 스토리지에 저장
         if (accessToken) {
           localStorage.setItem('authorization', accessToken);
+
         }
         if (refreshToken) {
           localStorage.setItem('authorization-Refresh', refreshToken);
         }
+
+        // 로그인 상태 및 사용자 ID 업데이트
+        setLoginState({
+          isLogin: true, // 로그인 상태 true로 설정
+          userId: userId, // 사용자 ID 설정
+        });
 
         // 홈 페이지로 리다이렉트
         router.push('/home');
