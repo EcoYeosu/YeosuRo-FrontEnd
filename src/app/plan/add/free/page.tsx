@@ -13,6 +13,7 @@ const PlanTypeFree= () => {
 
     const [text,setText] = useState(true)
 
+    
     const router = useRouter();
     const nextPage = () => {
         router.push(`/plan/add/free`);

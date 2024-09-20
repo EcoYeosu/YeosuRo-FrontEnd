@@ -41,7 +41,7 @@ export const allPlanData = atom<PlanData[]>({
 });
 
 export const siteData = atom<Site>({
-    key: 'site',
+    key: 'siteData',
     default:{
         id: 0,
         category: '',
@@ -52,7 +52,8 @@ export const siteData = atom<Site>({
         visitDate: '',
         startTime: '',
         endTime: '',
-    }
+    },
+    effects_UNSTABLE: [persistAtom],
 });
   
 export const planData = atom<PlanData>({

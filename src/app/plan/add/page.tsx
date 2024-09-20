@@ -1,5 +1,8 @@
 'use client'
 
+import { useEffect } from 'react';
+import { useResetRecoilState } from 'recoil';
+import { allPlanData, planData, siteData } from '@/recoil/atoms';
 import MakeHeader from '@/components/plan/headers/MakeHeader'
 import Button from '@/components/common/buttons/Button'
 import '@/styles/calendar.css';
@@ -7,11 +10,20 @@ import Calendar from '@/components/plan/calendar/Calendar'
 import { useRouter } from "next/navigation";
 
 const PlanSelectDay = () => {
-
+    
+    const resetAllPlanData = useResetRecoilState(allPlanData);
+    const resetSiteData = useResetRecoilState(siteData);
+    const resetPlanData = useResetRecoilState(planData);
+    
     const router = useRouter();
     const nextPage = () => {
         router.push(`/plan/add/free`);
     }
+    useEffect(()=>{
+        resetAllPlanData();
+        resetSiteData();
+        resetPlanData();
+    },[])
 
     return (
         <div style={{ width: '360px', margin:'0 auto' }}>
