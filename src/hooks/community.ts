@@ -35,8 +35,8 @@ export const useUploadImages = () => {
 
         console.log('이미지 업로드 응답:', response);
 
-        if (response.status === 200 && response.data?.data && Array.isArray(response.data.data)) {
-          return response.data.data; // 업로드된 이미지 URL 배열 반환
+        if (response.status === 200 && response.data && Array.isArray(response.data)) {
+          return response.data; // 업로드된 이미지 URL 배열 반환
         } else {
           throw new Error('이미지 업로드 실패: 서버 응답이 올바르지 않습니다.');
         }
@@ -169,25 +169,159 @@ export const useDeleteFeed = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          withCredentials: true,  // 인증 정보 전송
         });
 
-        // 응답 상태 코드를 확인하는 안전한 방법
-        const status = response?.status;
-
-        console.log('서버 응답 상태 코드:', status);
-
-        // 200, 204를 성공으로 간주
-        if (response.status !== 204) {
-          throw new Error(`피드 삭제에 실패했습니다. 서버 응답 상태: ${status}`);
+        if (response?.status !== 200) {
+          throw new Error(`피드 삭제에 실패했습니다. 서버 응답 상태: ${response?.status}`);
         }
       } catch (error: any) {
-        console.error('DELETE 요청 중 오류 발생:', error.response || error.message);
+        // 에러가 발생한 경우 처리
+        if (error.response) {
+          console.error('서버 응답에서 오류 발생:', error.response.status);
+          console.error('서버 응답 데이터:', error.response.data);
+        } else if (error.request) {
+          console.error('요청이 전송되었으나 응답이 없습니다:', error.request);
+        } else {
+          console.error('요청 설정 중 오류 발생:', error.message);
+        }
         throw new Error('피드 삭제에 실패했습니다.');
       }
+
     },
-    onSuccess: () => {
-      // 필요한 경우 쿼리 무효화 또는 업데이트
-      queryClient.invalidateQueries({ queryKey: ['feedId'] });
+    onSuccess: (_, { feedId }) => {
+      // 목록 페이지 쿼리를 강제로 다시 패치
+      queryClient.invalidateQueries({ queryKey: ['communityFeeds'] });
+      queryClient.invalidateQueries({ queryKey: ['postDetail', feedId] });
+    },
+    onSettled: () => {
+      queryClient.refetchQueries({ queryKey: ['communityFeeds'] });  // 목록 강제 리패치
+    },
+  });
+};
+
+// 좋아요 등록 쿼리
+export const useLikeFeed = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<void, Error, { feedId: number }>({
+    mutationFn: async ({ feedId }) => {
+      const token = localStorage.getItem('accessToken');
+      console.log('좋아요 등록 요청: feedId=', feedId, 'token=', token);
+      const response = await api.post(`/feeds/${feedId}/likes`, null, { // null을 데이터로 전달
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log('좋아요 등록 응답:', response);
+      if (response.status < 200 || response.status >= 300) { // 2xx 상태 코드 확인
+        throw new Error('좋아요 등록에 실패했습니다.');
+      }
+    },
+    onSuccess: (_, { feedId }) => {
+      // 좋아요 등록 성공 시, 해당 피드 상세 정보 및 목록을 다시 불러옴
+      queryClient.invalidateQueries({ queryKey: ['postDetail', feedId] });
+      queryClient.invalidateQueries({ queryKey: ['communityFeeds'] });
+    },
+    onError: (error) => {
+      console.error('useLikeFeed 에러:', error);
+    },
+  });
+};
+
+// 좋아요 취소 쿼리
+export const useUnlikeFeed = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<void, Error, { feedId: number }>({
+    mutationFn: async ({ feedId }) => {
+      const token = localStorage.getItem('accessToken');
+      
+      // 서버에 DELETE 요청을 보냄
+      const response = await api.delete(`/feeds/${feedId}/likes`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // 상태 코드 확인
+      if (response.status < 200 || response.status >= 300) {
+        throw new Error('좋아요 취소에 실패했습니다.');
+      }
+    },
+    onSuccess: (_, { feedId }) => {
+      // 성공 시, 상세 게시글 데이터를 다시 불러옴
+      queryClient.invalidateQueries({ queryKey: ['postDetail', feedId] });
+
+      // 커뮤니티 목록 페이지도 업데이트
+      queryClient.invalidateQueries({ queryKey: ['communityFeeds'] });
+    },
+    onError: (error) => {
+      console.error('좋아요 취소 실패:', error.message);
+      alert('좋아요 취소에 실패했습니다.');
+    },
+  });
+};
+
+// 저장 등록 쿼리
+export const useStoreFeed = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<void, Error, { type: string; id: number }>({
+    mutationFn: async ({ type, id }) => {
+      const token = localStorage.getItem('accessToken');
+      console.log('저장 등록 요청: type=', type, 'id=', id, 'token=', token);
+
+      const response = await api.post(`/store/${type}/${id}`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log('저장 등록 응답:', response);
+      if (response.status < 200 || response.status >= 300) {
+        throw new Error('저장 등록에 실패했습니다.');
+      }
+    },
+    onSuccess: (_, { id }) => {
+      // 저장 등록 성공 시, 해당 피드 상세 정보 및 목록을 다시 불러옴
+      queryClient.invalidateQueries({ queryKey: ['postDetail', id] });
+      queryClient.invalidateQueries({ queryKey: ['communityFeeds'] });
+    },
+    onError: (error) => {
+      console.error('useStoreFeed 에러:', error);
+    },
+  });
+};
+
+// 저장 취소 쿼리
+export const useUnstoreFeed = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<void, Error, { type: string; id: number }>({
+    mutationFn: async ({ type, id }) => {
+      const token = localStorage.getItem('accessToken');
+      console.log('저장 취소 요청: type=', type, 'id=', id, 'token=', token);
+
+      const response = await api.delete(`/store/${type}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.status < 200 || response.status >= 300) {
+        throw new Error('저장 취소에 실패했습니다.');
+      }
+    },
+    onSuccess: (_, { id }) => {
+      // 저장 취소 성공 시, 해당 피드 상세 정보 및 목록을 다시 불러옴
+      queryClient.invalidateQueries({ queryKey: ['postDetail', id] });
+      queryClient.invalidateQueries({ queryKey: ['communityFeeds'] });
+    },
+    onError: (error) => {
+      console.error('저장 취소 실패:', error.message);
+      alert('저장 취소에 실패했습니다.');
     },
   });
 };
