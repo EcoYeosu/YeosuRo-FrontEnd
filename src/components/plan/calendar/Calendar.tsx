@@ -10,7 +10,12 @@ type ValuePiece = Date | null;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-const CustomCalendar = () => {
+interface CalendarProps {
+    setTitle: React.Dispatch<React.SetStateAction<string>>;
+    setDate: React.Dispatch<React.SetStateAction<string>>;
+  }
+
+const CustomCalendar: React.FC<CalendarProps> = ({ setTitle, setDate }) => {
 
     const [value, setValue] = useState<Value>(new Date());
     const [activeStartDate, setActiveStartDate] = useState(new Date());
@@ -18,6 +23,7 @@ const CustomCalendar = () => {
 
     const currentMonth = (value as Date).toLocaleString('en', { month: 'short' });
     const currentYear = (value as Date).getFullYear();
+    const startData = value instanceof Date ? `${value.getFullYear()}-${String(value.getMonth() + 1).padStart(2, '0')}-${String(value.getDate()).padStart(2, '0')}` : '';
 
     const handlePrevMonth = () => {
         const newDate = new Date(value as Date);
@@ -49,16 +55,25 @@ const CustomCalendar = () => {
 
     useEffect(() => {
         setIsClient(true)
-        console.log(value)
+        setDate(startData)
       }, [value])
     
     return (
         <div style={{ width: '320px', margin:'0 auto'}}>
-                <div className={`font-regular`} style={{ width: '100%',lineHeight:'44px', margin:'24px 0 12px 0', background:'#F6F6F6' }}>
-                    <p style={{ padding: '0 16px' }}>
-                        {value instanceof Date ? `${value.getFullYear()}. ${String(value.getMonth() + 1).padStart(2, '0')}. ${String(value.getDate()).padStart(2, '0')}` : ''}
-                    </p>
-                </div>
+                <p style={{ margin:'24px 0 0 0' }}>여정 제목</p>
+                <input 
+                    className={`font-regular`} 
+                    style={{ width: '100%',lineHeight:'44px', padding: '0 16px', margin:'8px 0 12px 0', background:'#F6F6F6' }}
+                    placeholder='여정 제목을 입력해주세요.'
+                    onChange={(e)=>setTitle(e.target.value)}
+                 />
+                <p style={{ margin:'24px 0 0 0' }}>일정</p>
+                <input 
+                    className={`font-regular`} 
+                    style={{ width: '100%',lineHeight:'44px', padding: '0 16px', margin:'8px 0 12px 0', background:'#F6F6F6' }}
+                    placeholder='여정 제목을 입력해주세요.'
+                    value={value instanceof Date ? `${value.getFullYear()}. ${String(value.getMonth() + 1).padStart(2, '0')}. ${String(value.getDate()).padStart(2, '0')}` : ''}
+                 />
             <div className='w-full flex' style={{ justifyContent:'space-between' }}>
                 <div className='flex justify-between items-center'>
                     <div onClick={handlePrevMonth}>

@@ -1,13 +1,41 @@
+import Image from 'next/image';
 
-// to do selectId 를 받아와서 해당 id와 장소의 id가 맞으면 배경색 지정 useState 필요
-const PlaceCard = () => {
+interface PlaceCardProps {
+  place: any;
+  select:string
+  setSelect: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const PlaceCard: React.FC<PlaceCardProps> = ({ place, setSelect, select }) => {
+
+  const selectId = select === place.contentid
+
+  const againClick = (select:string) => {
+    if(select === place.contentid){
+      setSelect('')
+    }else{
+      setSelect(place.contentid)
+    }
+  }
 
   return (
-    <div style={{ width: '340px', height: '90px', padding:'10px',background:'#EFEFEF',margin:'0 auto', borderRadius:'8px',display:'flex',gap:'12px',alignItems:'center'}}>
-        <div style={{ width: '66px', height: '66px'}}>img</div>
+    <div 
+      style={{ width: `${selectId ? '340px' : '320px'}`, height: '90px', padding:'10px',background:`${selectId ? '#EFEFEF' : 'none'}`,margin:'0 auto', borderRadius:'8px',display:'flex',gap:'12px',alignItems:'center'}}
+      onClick={()=>againClick(select)}
+    >
+        <div style={{ width: '66px', height: '66px', position: 'relative', overflow: 'hidden', borderRadius: '4px', textAlign:'center'}}>
+          {place.firstimage === '' ? 'No Image' :
+          <Image
+          src={place.firstimage}
+          alt={place.title}
+          layout="fill"
+          objectFit="cover"  
+          />
+        }
+        </div>
         <div style={{}}>
-          <p style={{ fontSize:'16px'}}>장소명 입력</p>
-          <p style={{ fontSize:'14px'}}>장소 주소 입력</p>
+          <p style={{ fontSize:'16px', fontWeight:'600' }}>{place.title}</p>
+          <p style={{ fontSize:'14px'}}>{place.addr1}</p>
         </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 import { recoilPersist } from "recoil-persist";
-import { PlanData,Site } from '@/type/plan'
+import { PlanData,Site, PostPlanData } from '@/type/plan'
 import { SignUpState, UpdatePasswordState, PostFeedState } from './type';
 
 
@@ -76,6 +76,18 @@ export const postFeedState = atom<PostFeedState>({
     default:{
         feedCategory: undefined,
         imageUrls: [],
+    },
+    effects_UNSTABLE: [persistAtom],
+});
+
+export const postPlanData = atom<PostPlanData>({
+    key: 'postPlanData',
+    default:{
+        title: '',
+        content: '',
+        startDate: '',
+        endDate: '',
+        sites:[],
     },
     effects_UNSTABLE: [persistAtom],
 });

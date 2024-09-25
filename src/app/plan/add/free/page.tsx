@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import { useRecoilValue } from 'recoil';
+import { postPlanData } from '@/recoil/atoms';
 import Button from "@/components/common/buttons/Button";
 import TitleHeader from "@/components/plan/headers/TitleHeader";
 import { useRouter } from "next/navigation";
@@ -12,6 +14,8 @@ import BottomSheet from "@/components/common/bottomSheet/Bottomsheet";
 const PlanTypeFree= () => {
 
     const [text,setText] = useState(true)
+
+    const postData = useRecoilValue(postPlanData)
 
     
     const router = useRouter();
@@ -26,7 +30,7 @@ const PlanTypeFree= () => {
             <div style={{ width: '320px', margin:'0 auto', display:'flex' ,flexDirection:'column',alignItems:'center'}}>
                 <div style={{ width: '100%', marginTop:'24px', display:'flex',justifyContent:'space-between'}}>
                     <div>
-                        <p style={{color:'#777777', fontSize:'14px'}}>2024. 05. 05</p>
+                        <p style={{color:'#777777', fontSize:'14px'}}>{postData.startDate}</p>
                         <p style={{fontWeight:'600',fontSize:'16px'}}>1일째</p>
                     </div>
                     <div style={{ display:'flex',justifyContent:'space-between'}}>
