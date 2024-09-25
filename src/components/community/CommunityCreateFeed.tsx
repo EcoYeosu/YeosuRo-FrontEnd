@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useRecoilState } from 'recoil';
 import { postFeedState } from '@/recoil/atoms';
 import { useUploadImages, useCreateFeed } from '@/hooks/community';
+import BackIcon from '@/components/community/images/backIcon.svg'
 import styles from '@/styles/community/CommunityCreateFeed.module.css';
 
 const CommunityCreateFeed: React.FC = () => {
@@ -95,8 +96,8 @@ const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     <div className={styles.createFeedContainer}>
       {/* 상단 바 */}
       <div className={styles.header}>
-        <button onClick={() => router.back()} className={styles.backButton}>
-          ←
+      <button onClick={() => router.back()} className={styles.backButton}>
+          <BackIcon className={styles.backIcon} />
         </button>
         <h2 className={styles.pageTitle}>게시글 작성하기</h2>
         <button onClick={handleSubmit} className={styles.submitButton}>완료</button>

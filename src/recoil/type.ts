@@ -10,7 +10,6 @@ export interface SignUpState {
     agree: boolean | undefined;
 }
 
-
 export interface Site {
     id: number;
     category: string;
@@ -32,6 +31,7 @@ export interface Plan {
     endDate: string;
     siteList: Site[];
 }
+
 export interface UpdatePasswordState {
     email: string | undefined;
     password: string | undefined;
@@ -39,5 +39,10 @@ export interface UpdatePasswordState {
 
 export interface PostFeedState {
     feedCategory: string | undefined;
-    imageUrls: string[]; 
+    imageUrls: string[];
 }
+
+export interface FeedState {
+    isLikedState: boolean;
+    isStoredState: boolean;
+  }

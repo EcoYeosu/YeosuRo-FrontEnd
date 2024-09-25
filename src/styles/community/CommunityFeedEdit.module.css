@@ -1,3 +1,11 @@
+/* 메인 컨테이너 */
+.container {
+  max-width: 375px; /* 모바일 화면 폭 */
+  margin: 0 auto; /* 페이지 중앙 배치 */
+  padding: 16px; /* 내부 여백 */
+  box-sizing: border-box;
+  background-color: #fff; /* 배경색 */
+}
 .editContainer {
     display: flex;
     flex-direction: column;
