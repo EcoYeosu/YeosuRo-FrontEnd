@@ -38,7 +38,7 @@ const OAuthCallback: React.FC = () => {
         });
 
         // 홈 페이지로 리다이렉트
-        router.push('/home');
+        router.push('/plan');
       } catch (error) {
         console.error('카카오 로그인 후 토큰 처리 중 오류 발생:', error);
         alert('로그인 처리 중 문제가 발생했습니다.');

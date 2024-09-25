@@ -8,7 +8,7 @@ const Complete: React.FC = () => {
 
   const router = useRouter();
   const nextPage = () => {
-      router.push(`/login/email`);
+      router.push(`/plan`);
   }
 
   

@@ -46,7 +46,7 @@ const Email: React.FC = () => {
 
 
       // 로그인 성공 후 페이지 이동
-      router.push(`/home`);
+      router.push(`/plan`);
       
     } catch (error) {
       console.error('로그인 실패:', error);

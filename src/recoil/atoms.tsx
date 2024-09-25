@@ -1,6 +1,6 @@
 import { atom, atomFamily } from 'recoil';
 import { recoilPersist } from "recoil-persist";
-import { PlanData, Site } from '@/type/plan';
+import { PlanData, Site, PostPlanData } from '@/type/plan';
 import { SignUpState, UpdatePasswordState, PostFeedState, LoginState, FeedState } from './type';
 
 const { persistAtom } = recoilPersist({
