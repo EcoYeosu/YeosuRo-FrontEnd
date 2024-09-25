@@ -4,7 +4,10 @@ import Script from "next/script"
 export default function Document() {
   return (
     <Html>
-      <Head />
+      <Head>
+        <title>여수로</title>
+        <meta property="og:title" content="My page title" key="title" />
+      </Head>
       <body>
         <Main />
         <NextScript />
