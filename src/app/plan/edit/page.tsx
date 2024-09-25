@@ -3,7 +3,6 @@
 import { useState,useEffect } from "react";
 import Button from "@/components/common/buttons/Button";
 import TitleHeader from "@/components/plan/headers/TitleHeader";
-import KakaoMap from "@/components/common/kakao/KakaoMap";
 import Toggle from "@/components/plan/toggle/toggle"
 import BottomSheet from "@/components/common/bottomSheet/Bottomsheet";
 import PlaceCard from "@/components/plan/card/PlaceCard";
@@ -20,12 +19,20 @@ const KakaoMapNoSSR = dynamic(() => import('@/components/common/kakao/KakaoMap')
 const PlanEdit= () => {
     
     const planDataState = useRecoilValue(planData);
-    const [text,setText] = useState(false)
+
+    //placeCard 컴포넌트 사용될 useState
+    const [selectCardId, setSelectCardId] = useState(0)
     const [isClient, setIsClient] = useState(false);
     const cardColor = [
-        '#0D77E0','#37E00D','#E0920D','#E00DB3','#572AAE',
-        '#1FD8D8','#D95050','#3F4CC5','#2F9E86','#B22EE0'
+      '#0D77E0','#37E00D','#E0920D','#E00DB3','#572AAE',
+      '#1FD8D8','#D95050','#3F4CC5','#2F9E86','#B22EE0'
     ]
+
+    //kakaoMap 컴포넌트 사용될 useState
+    const [placeData, setPlaceData] = useState('') //보류
+    
+    //bottomSheet 컴포넌트 사용될 useState
+    const [text,setText] = useState(false)
 
     useEffect(() => {
         setIsClient(true);
@@ -86,7 +93,9 @@ const PlanEdit= () => {
             ):
             <>
               {planDataState && planDataState.siteList.map((site:Site,index) => (
-                <PlaceCard color={cardColor[index]} site={site} key={site.id}/>
+                <div onClick={()=>selectCardId === site.id ? setSelectCardId(0) : setSelectCardId(site.id)} key={site.id}>
+                  <PlaceCard color={cardColor[index]} site={site} selectCardId={selectCardId} index={index + 1}/>
+                </div>
               ))}
             </>
             }

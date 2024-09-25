@@ -49,7 +49,7 @@ export const allPlanData = atom<PlanData[]>({
 
 // 사이트 정보 상태 관리
 export const siteData = atom<Site>({
-    key: 'site',
+    key: 'siteData',
     default:{
         id: 0,
         category: '',
@@ -60,7 +60,8 @@ export const siteData = atom<Site>({
         visitDate: '',
         startTime: '',
         endTime: '',
-    }
+    },
+    effects_UNSTABLE: [persistAtom],
 });
   
 export const planData = atom<PlanData>({
@@ -88,6 +89,17 @@ export const postFeedState = atom<PostFeedState>({
     effects_UNSTABLE: [persistAtom],
 });
 
+export const postPlanData = atom<PostPlanData>({
+    key: 'postPlanData',
+    default:{
+        title: '',
+        content: '',
+        startDate: '',
+        endDate: '',
+        sites:[],
+    },
+    effects_UNSTABLE: [persistAtom],
+});
 // 게시글 상세 상태 관리 (동적 상태: 각 feedId 별로 관리)
 export const isFeedState = atomFamily<FeedState, number>({
     key: 'isFeedState',
