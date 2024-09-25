@@ -10,6 +10,9 @@ const Complete: React.FC = () => {
   const nextPage = () => {
       router.push(`/login/email`);
   }
+  const reset = () =>{
+    localStorage.clear();
+  }
 
   
   return (
