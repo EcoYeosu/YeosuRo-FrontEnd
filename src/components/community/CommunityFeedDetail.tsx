@@ -126,76 +126,85 @@ const CommunityFeedDetail: React.FC<CommunityFeedDetailProps> = ({ feedId }) => 
   };
 
   return (
-    <div className="container">
-      {/* 상단 영역 */}
-      <div className={styles.header}>
-      <button onClick={() => router.back()} className={styles.backButton}>
-          <BackIcon className={styles.backIcon} />
-        </button>
+<div className="container">
+  {/* 상단 영역 */}
+  <div className={styles.header}>
+    <button onClick={() => router.back()} className={styles.backButton}>
+      <BackIcon className={styles.backIcon} />
+    </button>
+  </div>
+
+  {/* 제목 영역 */}
+  <div className={styles.titleSection}>
+    <h1 className={styles.title}>{title}</h1>
+    <p className={styles.date}>{new Date(createAt).toLocaleDateString()}</p>
+  </div>
+
+  {/* 작성자 정보 */}
+  <div className={styles.authorInfo}>
+    <Image src={profileImageUrl} alt="프로필 이미지" width={40} height={40} className={styles.profileImage} />
+    <div className={styles.authorDetails}>
+      <span className={styles.nickname}>{nickname}</span>
+      <span className={styles.tier}>{tier}</span>
+    </div>
+    {loginState.isLogin && memberID === loginState.userId && (
+      <div className={styles.actions}>
+        <button className={styles.editButton} onClick={handleEdit}>수정</button>
+        <button className={styles.deleteButton} onClick={handleDelete}>삭제</button>
       </div>
+    )}
+  </div>
 
-      {/* 제목 영역 */}
-      <div className={styles.titleSection}>
-        <h1 className={styles.title}>{title}</h1>
-        <p className={styles.date}>{new Date(createAt).toLocaleDateString()}</p>
-      </div>
+  {/* 피드 이미지들 */}
+  {imageUrls && imageUrls.length > 0 && (
+    <div className={styles.imageContainer}>
+      {imageUrls.map((url, index) => (
+        <Image key={index} src={url} alt={`피드 이미지 ${index + 1}`} width={320} height={280} className={styles.feedImage} />
+      ))}
+    </div>
+  )}
 
-      {/* 작성자 정보 */}
-      <div className={styles.authorInfo}>
-        <Image src={profileImageUrl} alt="프로필 이미지" width={40} height={40} className={styles.profileImage} />
-        <div className={styles.authorDetails}>
-          <span className={styles.nickname}>{nickname}</span>
-          <span className={styles.tier}>{tier}</span>
-        </div>
-        {loginState.isLogin && memberID === loginState.userId && (
-          <div className={styles.actions}>
-            <button className={styles.editButton} onClick={handleEdit}>수정</button>
-            <button className={styles.deleteButton} onClick={handleDelete}>삭제</button>
-          </div>
-        )}
-      </div>
-
-      {/* 피드 이미지들 */}
-      {imageUrls && imageUrls.length > 0 && (
-        <div className={styles.imageContainer}>
-          {imageUrls.map((url, index) => (
-            <Image key={index} src={url} alt={`피드 이미지 ${index + 1}`} width={400} height={300} className={styles.feedImage} />
-          ))}
-        </div>
-      )}
-
-      {/* 피드 내용 */}
-      <div className={styles.content}>
+  {/* 게시글 내용 영역 */}
+  <div className={styles.content}>
         <p>{content}</p>
       </div>
 
-      {/* 피드 정보 (조회수, 좋아요, 댓글 수) */}
-      <div className={styles.footer}>
-        <CommentIcon className={styles.icon} />
+  {/* 피드 정보와 좋아요/저장 버튼 */}
+  <div className={styles.footer}>
+    <div className={styles.feedInfo}>
+      <div className={styles.iconGroup}>
+        <CommentIcon />
         <span>{repliesCount}</span>
-        <HeartIcon className={styles.icon} />
-        <span>{likesCount}</span>
-        <ViewIcon className={styles.icon} />
-        <span>{view}</span>
-
-       {/* 좋아요 버튼 */}
-       <button onClick={handleLikeClick}>
-         <LikeBtnIcon
-           className={styles.likeIcon}
-           style={{ fill: feedState.isLikedState ? 'pink' : 'none' }} // 활성화 시 분홍색, 비활성화 시 비워두기
-         />
-       </button>
-
-       {/* 저장 버튼 */}
-       <button onClick={handleStoreClick}>
-         <StoreIcon
-           className={styles.storeIcon}
-           style={{ fill: feedState.isStoredState ? 'yellow' : 'none' }} // 저장 활성화 시 노란색, 비활성화 시 비워두기
-         />
-       </button>
       </div>
+      <div className={styles.iconGroup}>
+        <HeartIcon />
+        <span>{likesCount}</span>
+      </div>
+      <div className={styles.iconGroup}>
+        <ViewIcon />
+        <span>{view}</span>
+      </div>
+    </div>
 
-      {/* 댓글 입력 및 전송 영역 */}
+    <div className={styles.actionIcons}>
+      <button onClick={handleLikeClick} className={styles.iconGroup}>
+        <LikeBtnIcon
+          className={styles.likeIcon}
+          style={{ fill: feedState.isLikedState ? 'pink' : 'none' }}
+        />
+      </button>
+      <button onClick={handleStoreClick} className={styles.iconGroup}>
+        <StoreIcon
+          className={styles.storeIcon}
+          style={{ fill: feedState.isStoredState ? 'yellow' : 'none' }}
+        />
+      </button>
+    </div>
+  </div>
+
+  {/* 댓글 섹션 */}
+  <div className={styles.repliesSection}>
+      {/* 댓글 입력 영역 */}
       <div className={styles.commentInputContainer}>
         <input
           type="text"
@@ -204,30 +213,40 @@ const CommunityFeedDetail: React.FC<CommunityFeedDetailProps> = ({ feedId }) => 
           onChange={(e) => setComment(e.target.value)}
           className={styles.commentInput}
         />
-        <button onClick={handleCommentSubmit} className={styles.commentSubmitButton}>전송</button>
+        <button onClick={handleCommentSubmit} className={styles.commentSubmitButton}>
+          전송
+        </button>
       </div>
 
-      {/* 댓글 섹션 */}
-      <div className={styles.repliesSection}>
-        {replies && replies.map((reply) => (
-          <div key={reply.id} className={styles.replyItem}>
-            <Image
-              src={reply.profileImageUrl}
-              alt="댓글 작성자 프로필 이미지"
-              width={30} height={30} className={styles.replyProfileImage}
-            />
-            <div className={styles.replyContent}>
-              <div className={styles.replyAuthor}>
-                <span className={styles.nickname}>{reply.nickname}</span>
-                <span className={styles.tier}>{reply.tier}</span>
-                <span className={styles.createAt}>{new Date(reply.createAt).toLocaleDateString()}</span>
-              </div>
-              <p>{reply.content}</p>
+      {/* 댓글 리스트 */}
+      {replies && replies.map((reply) => (
+        <div key={reply.id} className={styles.replyItem}>
+          <Image
+            src={reply.profileImageUrl}
+            alt="댓글 작성자 프로필 이미지"
+            width={30}
+            height={30}
+            className={styles.replyProfileImage}
+          />
+          <div className={styles.replyContent}>
+            <div className={styles.replyAuthor}>
+              <span className={styles.nickname}>{reply.nickname}</span>
+              <span className={styles.tier}>{reply.tier}</span>
             </div>
+            <p className={styles.replyText}>{reply.content}</p>
+            <div className={styles.replyActions}>
+              <div className={styles.replyLikeIcon}>
+                <LikeBtnIcon />
+                <span>{reply.likesCount}</span>
+              </div>
+              <button>좋아요</button>
+              <button>답글</button>
           </div>
-        ))}
+        </div>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
   );
 };
 

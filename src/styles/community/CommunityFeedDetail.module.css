@@ -1,55 +1,61 @@
 /* 메인 컨테이너 */
 .container {
-  max-width: 375px; /* 모바일 화면 폭 */
-  margin: 0 auto; /* 페이지 중앙 배치 */
-  padding: 16px; /* 내부 여백 */
+  width: 360px;
+  margin: 20px auto;
+  padding: 16px;
   box-sizing: border-box;
-  background-color: #fff; /* 배경색 */
+  background-color: #fff;
+  overflow-y: auto;
 }
 
 .header {
+  width: 360px;
+  margin: 20px auto;
+  margin-top: 36px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  padding-left: 12px;
 }
 
 .titleSection {
-  display: flex;
+  width: 360px;
+  margin: 20px auto;
+  margin-top: 24px;
   flex-direction: column;
-  gap: 5px; /* 제목과 날짜 사이 간격 */
-  margin-bottom: 16px; /* 제목 아래 여백 */
+  gap: 4px;
+  margin-bottom: 36px;
+  padding-left: 20px;
 }
+
 .title {
   font-size: 2rem;
-  font-weight: bold;
 }
 
 .authorInfo {
-  display: flex; /* Flexbox 사용 */
-  align-items: center; /* 수직 가운데 정렬 */
-  margin-bottom: 16px; /* 하단 여백 */
-  font-weight: bold;
-  font-size: 1.1rem; /* 닉네임 폰트 크기 */
+  width: 360px;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 1.4rem;
+  padding-left: 20px;
 }
 
 .profileImage {
   width: 40px;
   height: 40px;
-  border-radius: 50%; /* 프로필 이미지 원형 */
+  border-radius: 50%;
   object-fit: cover;
 }
 
 .authorDetails {
-  margin-left: 10px; /* 프로필 이미지와 닉네임 간 간격 */
-  font-size: 1rem; /* 닉네임 및 티어 폰트 크기 */
+  margin-left: 10px;
+  font-size: 1rem;
 }
 
-/* 수정 및 삭제 버튼 스타일 */
 .actions {
-  display: flex;
-  gap: 8px; /* 버튼 사이 간격 */
-  margin-left: auto; /* 오른쪽 정렬 */
-  justify-content: flex-end; /* 오른쪽 끝에 배치 */
+  margin-left: auto;
 }
 
 .editButton,
@@ -80,40 +86,93 @@
 
 /* 이미지 컨테이너 */
 .imageContainer {
+  width: 360px;
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
   margin-top: 15px;
-  gap: 10px; /* 이미지들 사이 간격 */
+  gap: 15px;
   align-items: center;
-  
 }
 
 .feedImage {
-  width: 100%; /* 화면 전체 너비로 설정 */
-  max-width: 400px;
-  border-radius: 11px; /* 이미지 모서리를 둥글게 설정 */
-  object-fit: cover; /* 이미지 비율 유지하면서 컨테이너 채우기 */
+  margin:auto;
+  width: 320px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 11px;
 }
 
 .content {
-  margin-top: 20px;
-  font-size: 1.2rem;
+  width: 320px;
+  margin: 20px auto;
+  margin-top: 15px;
+  font-size: 1.6rem;
   margin-bottom: 50px;
 }
 
 .footer {
+  width: 360px;
+  margin: 20px auto;
   display: flex;
-  align-items: center;
-  gap: 2px;
+  justify-content: space-between; /* 양쪽 끝에 배치 */
+  align-items: center; /* 세로 중앙 정렬 */
+  margin-top: 15px;
+  padding-left: 10px;
+  padding-right: 20px;
 }
 
-.commentInputContainer {
+/* 피드 정보 (댓글 수, 좋아요 수, 조회수) */
+.feedInfo {
   display: flex;
   align-items: center;
-  margin-top: 20px;
-  padding: 10px;
+  gap: 10px;
+}
+
+.iconGroup {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: #888;
+}
+
+/* 좋아요와 저장 UI */
+.actionIcons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.likeIcon, .storeIcon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+/* 전체 댓글 섹션을 감싸는 컨테이너 */
+.repliesSection {
+  width: 360px;
+  margin: 20px auto;
+  background-color: #D9D9D9 !important; /* 전체 영역 연한 회색 */
+  padding: 16px;
   border-radius: 8px;
-  background-color: white;
+  
+  box-sizing: border-box;
+}
+
+/* 댓글 입력창과 댓글 리스트를 포함한 전체 영역 */
+.commentInputContainer {
+  width: 320px;  /* 너비를 320px로 고정 */
+  height: 44px;  /* 높이를 44px로 고정 */
+  background-color: #F5F5F5;  /* 입력창 배경 */
+  padding: 11px;  /* 내부 여백 (텍스트와 경계 사이) */
+  margin-top: 20px;
+  margin-bottom: 21px;
+  margin: 20px auto;
+  border-radius: 8px;  /* 모서리 둥글게 */
+  display: flex;
+  align-items: center;
 }
 
 .commentInput {
@@ -121,63 +180,60 @@
   padding: 8px;
   border: none;
   border-radius: 8px;
-  background-color: #f5f5f5;
+  background-color: #F5F5F5 !important; /* G100 색상 */
+  color: #888888 !important; /* G500 텍스트 색상 */
 }
 
 .commentSubmitButton {
   margin-left: 10px;
-  padding: 8px 16px;
+  padding: 8px;
   border: none;
-  border-radius: 8px;
-  background-color: #007bff;
-  color: #ffffff;
+  background-color: transparent !important; /* 배경색 투명하게 */
+  color: #007bff !important; /* 버튼 글자색 파란색 */
   cursor: pointer;
 }
 
 .commentSubmitButton:hover {
-  background-color: #0056b3;
+  color: #0056b3 !important; /* 호버 시 글자색 변경 */
 }
 
-.repliesSection {
-  margin-top: 30px;
-  background-color: #f5f5f5;
-  padding: 10px;
-  border-radius: 8px;
-  width: 100%;
-}
-
+/* 개별 댓글 항목 */
 .replyItem {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column; /* 세로 정렬 */
   margin-bottom: 15px;
-}
-
-.replyProfileImage {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%; /* 댓글 프로필 이미지 원형 */
-  object-fit: cover;
-}
-
-.replyContent {
-  margin-left: 10px;
-  padding: 10px;
-  border-radius: 8px;
   width: 100%;
 }
 
+/* 댓글 작성자 정보 */
 .replyAuthor {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 8px; /* 댓글 내용과의 간격 */
 }
 
-.replyAuthor .nickname {
-  font-weight: bold;
+/* 댓글 내용 */
+.replyContent {
+  padding: 8px 10px;
+  background-color: white !important; /* 댓글 영역의 배경색 */
+  border-radius: 8px;
+  margin-bottom: 8px; /* 좋아요 아이콘과의 간격 */
+  width: 100%;
+  font-size: 1rem; /* 댓글 폰트 크기 */
 }
 
-.replyAuthor .tier,
-.replyAuthor .createAt {
-  margin-left: 10px;
-  color: grey;
+/* 좋아요 아이콘과 좋아요 수 */
+.replyActions {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 아이콘과 숫자 간격 */
+  margin-bottom: 8px; /* 답글 버튼과의 간격 */
+}
+
+/* 좋아요, 답글 버튼 */
+.replyButtons {
+  display: flex;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: #888;
 }
