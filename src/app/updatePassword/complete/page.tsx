@@ -4,7 +4,7 @@ import React from 'react';
 import Head from 'next/head';
 import { useRouter } from "next/navigation";
 import Image from 'next/image'; // next/image 사용
-import checkImage from '@/features/login/images/Rectangle 284.png';
+import checkImage from '@/components/login/images/checkIcon.svg';
 
 const Complete: React.FC = () => {
 
