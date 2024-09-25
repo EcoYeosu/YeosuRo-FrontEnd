@@ -1,0 +1,239 @@
+/* 메인 컨테이너 */
+.container {
+  width: 360px;
+  margin: 20px auto;
+  padding: 16px;
+  box-sizing: border-box;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.header {
+  width: 360px;
+  margin: 20px auto;
+  margin-top: 36px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 12px;
+}
+
+.titleSection {
+  width: 360px;
+  margin: 20px auto;
+  margin-top: 24px;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 36px;
+  padding-left: 20px;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.authorInfo {
+  width: 360px;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 1.4rem;
+  padding-left: 20px;
+}
+
+.profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.authorDetails {
+  margin-left: 10px;
+  font-size: 1rem;
+}
+
+.actions {
+  margin-left: auto;
+}
+
+.editButton,
+.deleteButton {
+  background-color: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  margin-left: 16px;
+}
+
+.editButton:hover,
+.deleteButton:hover {
+  color: #000;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.tier,
+.createAt {
+  margin-left: 10px;
+  color: grey;
+}
+
+/* 이미지 컨테이너 */
+.imageContainer {
+  width: 360px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  gap: 15px;
+  align-items: center;
+}
+
+.feedImage {
+  margin:auto;
+  width: 320px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 11px;
+}
+
+.content {
+  width: 320px;
+  margin: 20px auto;
+  margin-top: 15px;
+  font-size: 1.6rem;
+  margin-bottom: 50px;
+}
+
+.footer {
+  width: 360px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between; /* 양쪽 끝에 배치 */
+  align-items: center; /* 세로 중앙 정렬 */
+  margin-top: 15px;
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+/* 피드 정보 (댓글 수, 좋아요 수, 조회수) */
+.feedInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconGroup {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: #888;
+}
+
+/* 좋아요와 저장 UI */
+.actionIcons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.likeIcon, .storeIcon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+/* 전체 댓글 섹션을 감싸는 컨테이너 */
+.repliesSection {
+  width: 360px;
+  margin: 20px auto;
+  background-color: #D9D9D9 !important; /* 전체 영역 연한 회색 */
+  padding: 16px;
+  border-radius: 8px;
+  
+  box-sizing: border-box;
+}
+
+/* 댓글 입력창과 댓글 리스트를 포함한 전체 영역 */
+.commentInputContainer {
+  width: 320px;  /* 너비를 320px로 고정 */
+  height: 44px;  /* 높이를 44px로 고정 */
+  background-color: #F5F5F5;  /* 입력창 배경 */
+  padding: 11px;  /* 내부 여백 (텍스트와 경계 사이) */
+  margin-top: 20px;
+  margin-bottom: 21px;
+  margin: 20px auto;
+  border-radius: 8px;  /* 모서리 둥글게 */
+  display: flex;
+  align-items: center;
+}
+
+.commentInput {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background-color: #F5F5F5 !important; /* G100 색상 */
+  color: #888888 !important; /* G500 텍스트 색상 */
+}
+
+.commentSubmitButton {
+  margin-left: 10px;
+  padding: 8px;
+  border: none;
+  background-color: transparent !important; /* 배경색 투명하게 */
+  color: #007bff !important; /* 버튼 글자색 파란색 */
+  cursor: pointer;
+}
+
+.commentSubmitButton:hover {
+  color: #0056b3 !important; /* 호버 시 글자색 변경 */
+}
+
+/* 개별 댓글 항목 */
+.replyItem {
+  display: flex;
+  flex-direction: column; /* 세로 정렬 */
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+/* 댓글 작성자 정보 */
+.replyAuthor {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px; /* 댓글 내용과의 간격 */
+}
+
+/* 댓글 내용 */
+.replyContent {
+  padding: 8px 10px;
+  background-color: white !important; /* 댓글 영역의 배경색 */
+  border-radius: 8px;
+  margin-bottom: 8px; /* 좋아요 아이콘과의 간격 */
+  width: 100%;
+  font-size: 1rem; /* 댓글 폰트 크기 */
+}
+
+/* 좋아요 아이콘과 좋아요 수 */
+.replyActions {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 아이콘과 숫자 간격 */
+  margin-bottom: 8px; /* 답글 버튼과의 간격 */
+}
+
+/* 좋아요, 답글 버튼 */
+.replyButtons {
+  display: flex;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: #888;
+}

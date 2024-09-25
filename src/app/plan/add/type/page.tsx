@@ -1,15 +1,15 @@
 'use client'
 
-import MakeHeader from '@/features/plan/components/headers/MakeHeader'
+import MakeHeader from '@/components/plan/headers/MakeHeader'
 import Button from '@/components/common/buttons/Button'
 import { useRouter } from "next/navigation";
 
 const PlanType = () => {
 
-    const router = useRouter();
-    const nextPage = () => {
-        router.push(`/plan/add/type/free`);
-    }
+    // const router = useRouter();
+    // const nextPage = () => {
+    //     router.push(`/plan/add/type/free`);
+    // }
 
     return (
         <div style={{ width: '360px', margin:'0 auto' }}>
@@ -24,9 +24,9 @@ const PlanType = () => {
                     <p className='font-semibold' style={{fontSize:'16px', letterSpacing: '-1.1px',lineHeight:'140%'}}>직접 여정 작성하기</p>
                     <p className='font-normal' style={{fontSize:'16px',letterSpacing: '-1.1px',lineHeight:'140%'}}>A부터 Z까지 직접 만드는 여정<br />이미 갈 곳이 다 정해져있으면 추천</p>
                 </div>
-                <div onClick={nextPage}>
+                {/* <div onClick={nextPage}>
                     <Button value={'다음'} className={'w-full'}/>
-                </div>
+                </div> */}
             </div>
         </div>
     )

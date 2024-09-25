@@ -1,0 +1,76 @@
+.postList {
+    padding: 10px;
+    margin-top: 100px;
+    background-color: white; /* 흰색 배경 */
+    overflow-y: auto; /* 세로 스크롤 가능 */
+    max-height: calc(100vh - 100px); /* 헤더 높이를 제외한 최대 높이 설정 */
+
+  
+    flex-direction: column; /* 세로 정렬 */
+    align-items: center; /* 중앙 정렬 */
+
+}
+
+/* 게시글 항목 */
+.postItem {
+    background-color: white; /* 흰색 배경 */
+    padding: 16px; /* 페이지 내부 패딩 */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+/* 게시글 카테고리 */
+.category {
+    display: block;
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+/* 제목 스타일 */
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+/* 작성자 정보 */
+.authorInfo {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.profileImage {
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+/* 이미지 스타일 */
+.images {
+    display: flex;
+    overflow-x: scroll;
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.postImage {
+    width: 250px; /* 이미지 너비 */
+    height: 150px; /* 이미지 높이 */
+    border-radius: 8px;
+}
+
+/* 댓글, 좋아요, 조회수 아이콘 및 텍스트 */
+.footer {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.icon {
+    width: 20px; /* 아이콘 너비 */
+    height: 20px; /* 아이콘 높이 */
+    align-items: center;
+    margin-right: 1px;
+}

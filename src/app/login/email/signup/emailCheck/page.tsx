@@ -1,19 +1,99 @@
 'use client'
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Checkbox from '@/features/login/images/checkbox.svg';
-import BackIcon from '@/features/login/images/backIcon.svg';
-import CancelIcon from '@/features/login/images/CancelIcon.svg';
+import BackIcon from '@/components/login/images/backIcon.svg';
+import CancelIcon from '@/components/login/images/CancelIcon.svg';
 import { useRouter } from "next/navigation";
-
+import { useSetRecoilState } from 'recoil';
+import { signUpState } from '@/recoil/atoms';
 
 const EmailCheck: React.FC = () => {
+  const [email, setEmail] = useState<string>('');
+  const [authCode, setAuthCode] = useState<string>('');
+  const [timer, setTimer] = useState<number>(180);
+  const [statusMessage, setStatusMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [codeErrorMessage, setCodeErrorMessage] = useState<string>('');
+  const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
 
   const router = useRouter();
-  const nextPage = () => {
-      router.push(`/login/email/signup/passwordCheck`);
-  }
+  const setUserState = useSetRecoilState(signUpState);
+
+  useEffect(() => {
+    let interval: NodeJS.Timer;
+    if (isTimerActive) {
+      interval = setInterval(() => {
+        setTimer((prev) => {
+          if (prev <= 0) {
+            clearInterval(interval);
+            setIsTimerActive(false);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isTimerActive]);
+
+  const isValidEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailVerification = async () => {
+    if (!isValidEmail(email)) {
+      setStatusMessage('');
+      setErrorMessage('올바른 이메일 형식을 입력해주세요');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}sign-up/mailSend?mail=${email}`, {
+        method: 'POST',
+      });
+      if (response.ok) {
+        setIsTimerActive(true);
+        setStatusMessage('이메일이 전송됐습니다. 확인해주세요.');
+        setErrorMessage('');
+      } else if (response.status === 409) {
+        setStatusMessage('');
+        setErrorMessage('이미 가입된 계정입니다.');
+      } else {
+        setStatusMessage('');
+        setErrorMessage('요청에 실패했습니다. 나중에 다시 시도해주세요.');
+      }
+    } catch (error) {
+      setStatusMessage('');
+      setErrorMessage('네트워크 오류가 발생했습니다.');
+    }
+  };
+
+  const handleNext = async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}sign-up/mailCheck?code=${authCode}&type=${email}`, {
+        method: 'GET',
+      });
+      if (response.ok) {
+        setUserState((prevState) => ({
+          ...prevState,
+          email,
+        }));
+        router.push('/login/email/signup/passwordCheck');
+      } else {
+        setCodeErrorMessage('인증번호가 일치하지 않아요. 다시 확인해주세요');
+      }
+    } catch (error) {
+      setCodeErrorMessage('네트워크 오류가 발생했습니다.');
+    }
+  };
+
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  };
 
   return (
     <>
@@ -22,23 +102,48 @@ const EmailCheck: React.FC = () => {
         <meta name="description" content="여수 자전거 여행" />
       </Head>
       <div style={styles.container}>
-        <div style={{width:'320px',margin:'0 auto'}}>
-            <div style={styles.headerBox}>
-                <BackIcon style={styles.backIcon}/>
-                <CancelIcon />
-            </div>
-            <p style={styles.welcomeText}>우선 가입하실 계정부터<br/>적어주세요</p>
-            <div style={styles.inputboxContainer}>
-                <p>이메일</p>
-                <div style={styles.textInputBox}>
-                    <input style={styles.textInput} type="email" placeholder="이메일"/>
-                    <button style={styles.authButton}>인증</button>
+        <div style={{ width: '320px', margin: '0 auto' }}>
+          <div style={styles.headerBox}>
+            <BackIcon style={styles.backIcon} />
+            <CancelIcon />
+          </div>
+          <p style={styles.welcomeText}>우선 가입하실 계정부터<br />적어주세요</p>
+          <div style={styles.inputboxContainer}>
+            <p>이메일</p>
+            <div style={styles.textInputBox}>
+              <input
+                style={styles.textInput}
+                type="email"
+                placeholder="이메일"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <button
+                style={styles.authButton}
+                onClick={handleEmailVerification}
+              >
+                인증
+              </button>
+              {isTimerActive && (
+                <div style={styles.timer}>
+                  {formatTime(timer)}
                 </div>
-                <div style={styles.textInputBox}>
-                    <input style={styles.textInput} type="password" placeholder="인증번호 입력"/>
-                </div>
+              )}
             </div>
-            <button onClick={nextPage} style={styles.nextButton}>다음</button>
+            <p style={styles.errorMessage}>{errorMessage}</p>
+            <p style={styles.statusMessage}>{statusMessage}</p>
+            <div style={styles.textInputBox}>
+              <input
+                style={styles.textInput}
+                type="text"
+                placeholder="인증번호 입력"
+                value={authCode}
+                onChange={(e) => setAuthCode(e.target.value)}
+              />
+            </div>
+            <p style={styles.codeErrorMessage}>{codeErrorMessage}</p>
+          </div>
+          <button onClick={handleNext} style={styles.nextButton}>다음</button>
         </div>
       </div>
     </>
@@ -51,15 +156,15 @@ const styles: any = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    margin:'0 auto',
+    margin: '0 auto',
   },
-  backIcon:{
-    padding:'0',
+  backIcon: {
+    padding: '0',
   },
-  headerBox:{
-    display:'flex',
-    alignItems:'center',
-    justifyContent:'space-between'
+  headerBox: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
   welcomeText: {
     color: '#1f1f1f',
@@ -70,46 +175,71 @@ const styles: any = {
     lineHeight: '140%',
     letterSpacing: '-0.011em',
   },
-  textInputBox:{
+  inputboxContainer: {
+    fontFamily: 'Pretendard, sans-serif',
+    display: 'flex',
+    marginBottom : '245px',
+    flexDirection: 'column',
+    gap: '1px',
+  },
+  textInputBox: {
     width: '100%',
     height: '44px',
-    position:'relative',
-    background:'#efefef',
+    position: 'relative',
+    background: '#efefef',
     borderRadius: '4px',
     border: 'none',
     fontSize: '14px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
   },
   textInput: {
-    width: '100%',
+    width: 'calc(100% - 80px)', // Adjust width to make space for button and timer
     height: '44px',
-    background:'none',
+    background: 'none',
     borderRadius: '4px',
     border: 'none',
     fontSize: '14px',
-    padding: '0 12px'
+    padding: '0 12px',
+    boxSizing: 'border-box',
   },
-  authButton:{
-    width:'60px',
-    height:'32px',
-    background:'#0D77E0',
-    color:'white',
-    position:'absolute',
-    right:'6px',
-    top:'6px',
-    fontSize:'14px',
-    fontWeight:'600',
-    borderRadius:'4px',
+  authButton: {
+    width: '60px',
+    height: '32px',
+    background: '#0D77E0',
+    color: 'white',
+    fontSize: '14px',
+    fontWeight: '600',
+    borderRadius: '4px',
+    zIndex: 1, // Ensure button is on top of timer
   },
-  inputboxContainer: {
-    fontFamily:'Pretendard, sans-serif',
-    marginBottom: '245px',
-    display:'flex',
-    flexDirection:'column',
-    gap:'12px',
+  timer: {
+    position: 'absolute',
+    right: '80px', // Adjust to position correctly next to button
+    top: '13px',
+    fontSize: '12px',
+    color: '#0D77E0',
+    fontWeight: '600',
+  },
+  statusMessage: {
+    color: '#0D77E0',
+    fontSize: '12px',
+    marginTop: '1px',
+  },
+  errorMessage: {
+    color: '#FF4C4C',
+    fontSize: '12px',
+    marginTop: '1px',
+  },
+  codeErrorMessage: {
+    color: '#FF4C4C',
+    fontSize: '12px',
+    marginTop: '1px',
   },
   nextButton: {
-    width:'100%',
-    height:'48px',
+    width: '100%',
+    height: '48px',
     backgroundColor: '#0D77E0',
     color: '#fff',
     borderRadius: '4px',
@@ -117,6 +247,7 @@ const styles: any = {
     cursor: 'pointer',
     fontFamily: 'Pretendard, sans-serif',
     fontWeight: 'bold' as 'bold',
+    marginTop: '20px',
   },
 };
 

@@ -6,14 +6,13 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 
-
 function HttpClient(config?: AxiosRequestConfig) {
-  
   const getResult = (response: AxiosResponse) => response.data;
   const client: AxiosInstance = axios.create(config);
-  const token = '';
 
   const onRequestFulfilled = (config: InternalAxiosRequestConfig) => {
+    // 매 요청 시마다 최신 토큰을 가져옵니다.
+    const token = localStorage.getItem('accessToken');
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }

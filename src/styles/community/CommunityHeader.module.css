@@ -1,0 +1,53 @@
+.header {
+    position: fixed;
+    top: 0; /* 헤더가 고정될 위치 */
+    z-index: 1000; /* 다른 요소 위에 표시되도록 z-index 설정 */
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+}
+
+.topSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    margin-left: 16px;
+    cursor: pointer;
+}
+
+.navBar {
+    display: flex;
+    gap: 12px; /* 각 카테고리 버튼 간격 조정 */
+}
+
+.categoryButton {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #888;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.categoryButton.active {
+    color: #007bff; /* 활성화된 버튼의 색상 */
+    font-weight: bold;
+}
